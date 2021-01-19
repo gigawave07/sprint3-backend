@@ -22,7 +22,7 @@ public class Notification {
     @Column(name = "content", columnDefinition = "VARCHAR(250)")
     private String content;
 
-    @Column(name = "noti_url", columnDefinition = "VARCHAR(250)")
+    @Column(name = "noti_url", columnDefinition = "TEXT")
     private String notiURL;
 
     @Column(name = "status", columnDefinition = "BIT")
