@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/hoat")
+@RequestMapping("/thesis-detail")
 @CrossOrigin
-public class HoatController {
+public class ThesisDetailController {
 }
