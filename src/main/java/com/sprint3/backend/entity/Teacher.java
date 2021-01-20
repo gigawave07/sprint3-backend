@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity(name = "teacher")
 @Getter
@@ -44,9 +45,9 @@ public class Teacher {
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private java.util.List<StudentGroup> studentGroupList;
+    private List<StudentGroup> studentGroupList;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private java.util.List<Thesis> thesisList;
+    private List<Thesis> thesisList;
 }
