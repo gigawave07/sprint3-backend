@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "thesis")
 @Getter
@@ -41,5 +42,5 @@ public class Thesis {
 
     @OneToMany(mappedBy = "thesis", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private java.util.List<CheckThesis> checkThesisList;
+    private List<CheckThesis> checkThesisList;
 }
