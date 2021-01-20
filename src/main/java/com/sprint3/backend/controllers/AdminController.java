@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/nguyen-khanh")
+@RequestMapping("/admin")
 @CrossOrigin
-public class NguyenKhanhController {
+public class AdminController {
 }
