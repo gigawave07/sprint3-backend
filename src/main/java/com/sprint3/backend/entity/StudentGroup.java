@@ -38,4 +38,8 @@ public class StudentGroup {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private Teacher teacher;
+
+    @OneToOne
+    @JoinColumn(name = "check_thesis_id", referencedColumnName = "id", columnDefinition = "BIGINT")
+    private CheckThesis checkThesis;
 }

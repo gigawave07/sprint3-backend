@@ -36,4 +36,8 @@ public class CheckThesis {
     @OneToOne(mappedBy = "checkThesis", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
     private ThesisDetail thesisDetail;
+
+    @OneToOne(mappedBy = "checkThesis", cascade = CascadeType.ALL)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+    private StudentGroup studentGroup;
 }
