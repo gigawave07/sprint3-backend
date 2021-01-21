@@ -31,17 +31,12 @@ public class ThesisDetail {
     @Column(name = "submit_date", columnDefinition = "DATETIME")
     private LocalDateTime submitDate;
 
-    @Column(name = "first_comment", columnDefinition = "VARCHAR(250)")
+    @Column(name = "comment", columnDefinition = "VARCHAR(250)")
     private String firstComment;
 
-    @Column(name = "first_report", columnDefinition = "VARCHAR(250)")
+    @Column(name = "report", columnDefinition = "VARCHAR(250)")
     private String firstReport;
 
-    @Column(name = "second_comment", columnDefinition = "VARCHAR(250)")
-    private String secondComment;
-
-    @Column(name = "second_report", columnDefinition = "VARCHAR(250)")
-    private String secondReport;
 
     // relationship
 
