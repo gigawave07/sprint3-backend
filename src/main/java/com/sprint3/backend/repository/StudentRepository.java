@@ -12,13 +12,10 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
     /*List student*/
-    @Query(nativeQuery = true, value = "select student.full_name    as fullName,\n" +
-            "       student.group_id     as groupId,\n" +
-            "       student.student_code as studentCode,\n" +
-            "       student.email        as email\n" +
+    @Query(nativeQuery = true, value = "select student.full_name as fullName, student_group.group_name as nameGroup,\n" +
+            "       student.student_code as studentCode, student.email as email\n" +
             "from student\n" +
-            "         inner join student_group on student.group_id = student_group.id\n" +
-            "         inner join teacher on student_group.teacher_id = teacher.id\n" +
-            "where teacher.id = :idParam")
-    List<StudentDTO> getAllStudent(String idParam);
+            "inner join student_group on student.group_id = student_group.id\n" +
+            "where student.group_id = :idStudentParam")
+    List<StudentDTO> getAllStudent(String idStudentParam);
 }
