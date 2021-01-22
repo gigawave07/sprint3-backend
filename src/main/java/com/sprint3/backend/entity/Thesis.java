@@ -40,7 +40,7 @@ public class Thesis {
     @JoinColumn(name = "teacher_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "thesis", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "thesis", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private List<CheckThesis> checkThesisList;
+    private CheckThesis checkThesis;
 }
