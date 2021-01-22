@@ -22,7 +22,7 @@ import com.sprint3.backend.entity.CheckThesis;
 import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.entity.Thesis;
 import com.sprint3.backend.repository.StudentRepository;
-import com.sprint3.backend.services.CheckThesisService;
+import com.sprint3.backend.services.SubscribeThesisService;
 
 @Configuration
 @EnableScheduling
@@ -31,7 +31,7 @@ public class AutoSendMailForStudent {
     private JavaMailSender emailSender;
 
     @Autowired
-    private CheckThesisService checkThesisService;
+    private SubscribeThesisService subscribeThesisService;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -46,7 +46,7 @@ public class AutoSendMailForStudent {
     @Scheduled(fixedDelay = 1000 * 3600 * 24)
     private void scheduleFixedDelayTask() {
         System.out.println("System auto send mail start.");
-        List<CheckThesis> allCheckThesis = this.checkThesisService.findAll();
+        List<CheckThesis> allCheckThesis = this.subscribeThesisService.findAllCheckThesisForMail();
         List<CheckThesis> listCheckThesisNearExpired = new ArrayList<>();
         if (!allCheckThesis.isEmpty()) {
             filterCheckThesis(allCheckThesis, listCheckThesisNearExpired);
