@@ -29,7 +29,7 @@ public class CheckThesis {
 
     // relationship
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "thesis_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private Thesis thesis;
 
