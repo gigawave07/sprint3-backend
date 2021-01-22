@@ -37,7 +37,6 @@ public class ThesisDetail {
     @Column(name = "report", columnDefinition = "VARCHAR(250)")
     private String firstReport;
 
-
     // relationship
 
     @OneToOne

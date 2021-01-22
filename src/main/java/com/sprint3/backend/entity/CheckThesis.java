@@ -29,7 +29,7 @@ public class CheckThesis {
 
     // relationship
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "thesis_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private Thesis thesis;
 
@@ -37,7 +37,7 @@ public class CheckThesis {
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
     private ThesisDetail thesisDetail;
 
-    @OneToOne(mappedBy = "checkThesis", cascade = CascadeType.ALL)
-    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+    @OneToOne
+    @JoinColumn(name = "student_group_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private StudentGroup studentGroup;
 }
