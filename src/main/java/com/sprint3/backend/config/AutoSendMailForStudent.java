@@ -60,12 +60,14 @@ public class AutoSendMailForStudent {
         LocalDateTime checkDate;
         for (CheckThesis checkThesis : allCheckThesis) {
             for (int i = 1; i <= 4; i++) {
-                checkDate = checkThesis.getCheckDate().plusDays(7 * i);
-                Duration between = Duration.between(now, checkDate);
-                if (between.toHours() < 48 && between.toHours() >= 24) {
-                    listCheckThesisNearExpired.add(checkThesis);
-                    break;
-                }
+                if (checkThesis.getCheckDate() != null) {
+                    checkDate = checkThesis.getCheckDate().plusDays(7 * i);
+                    Duration between = Duration.between(now, checkDate);
+                    if (between.toHours() < 48 && between.toHours() >= 24) {
+                        listCheckThesisNearExpired.add(checkThesis);
+                        break;
+                    }
+                } else break;
             }
         }
         try {

@@ -15,5 +15,5 @@ public class SubscribeThesisDTO {
     String description;
     Long idTeacher;
     Long idThesis;
-    Long idGroup;
+    Long idStudent;
 }
