@@ -4,11 +4,10 @@ public interface StudentDTO {
 
     public String getFullName();
 
-    public String getGroupId();
-
     public String getStudentCode();
 
     public String getEmail();
 
     public String getNameGroup();
+
 }

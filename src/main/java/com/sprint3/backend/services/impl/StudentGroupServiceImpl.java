@@ -16,7 +16,7 @@ public class StudentGroupServiceImpl implements StudentGroupService {
 
     /*List student group*/
     @Override
-    public List<StudentGroupDTO> findAllStudentGroup(String id) {
+    public List<StudentGroupDTO> findAllStudentGroup(Long id) {
         return this.studentGroupRepository.findAllStudentGroup(id);
     }
 }

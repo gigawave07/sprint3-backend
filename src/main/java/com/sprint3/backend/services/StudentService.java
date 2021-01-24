@@ -7,5 +7,5 @@ import java.util.List;
 public interface StudentService {
 
     /*List student*/
-    List<StudentDTO> getAllStudent(String id);
+    List<StudentDTO> getAllStudent(Long id);
 }

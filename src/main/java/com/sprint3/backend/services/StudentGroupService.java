@@ -7,5 +7,5 @@ import java.util.List;
 public interface StudentGroupService {
 
     /*List student group*/
-    List<StudentGroupDTO> findAllStudentGroup(String id);
+    List<StudentGroupDTO> findAllStudentGroup(Long id);
 }

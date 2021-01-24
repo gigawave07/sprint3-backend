@@ -37,6 +37,7 @@ public class CheckThesis {
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
     private ThesisDetail thesisDetail;
 
+
     @OneToOne
     @JoinColumn(name = "student_group_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private StudentGroup studentGroup;

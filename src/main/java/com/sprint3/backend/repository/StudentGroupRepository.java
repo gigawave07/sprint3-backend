@@ -17,5 +17,5 @@ public interface StudentGroupRepository extends JpaRepository<StudentGroup, Long
             "from student_group\n" +
             "inner join teacher on student_group.teacher_id = teacher.id\n" +
             "where teacher.id = :idParam")
-    List<StudentGroupDTO> findAllStudentGroup(String idParam);
+    List<StudentGroupDTO> findAllStudentGroup(Long idParam);
 }
