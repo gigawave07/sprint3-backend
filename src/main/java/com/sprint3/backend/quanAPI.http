@@ -1,4 +1,4 @@
-GET http://localhost:8080/statistics/thesis
+GET http://localhost:8080/statistics/checked-thesis
 Accept: application/json
 
 ###

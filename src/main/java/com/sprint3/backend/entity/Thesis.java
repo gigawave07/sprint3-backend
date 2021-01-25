@@ -22,6 +22,9 @@ public class Thesis {
     @Column(name = "id", columnDefinition = "BIGINT")
     private Long id;
 
+    @Column(name = "thesis_code", columnDefinition = "VARCHAR(50)")
+    private String thesisCode;
+
     @Column(name = "statement", columnDefinition = "VARCHAR(50)")
     private String statement;
 
