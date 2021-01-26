@@ -36,6 +36,9 @@ public class Teacher {
     @Column(name = "phone", columnDefinition = "VARCHAR(50)")
     private String phone;
 
+    @Column(name = "number_student", columnDefinition = "BIGINT")
+    private Long numberStudent;
+
     // relationship
 
     @OneToOne
