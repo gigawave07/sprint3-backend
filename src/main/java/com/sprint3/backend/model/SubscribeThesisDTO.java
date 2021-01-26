@@ -10,7 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubscribeThesisDTO {
-    Long idStudent;
     String statement;
     Long amount;
     String description;

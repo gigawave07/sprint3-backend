@@ -12,6 +12,7 @@ import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.entity.Thesis;
 import com.sprint3.backend.services.SubscribeThesisService;
 import com.sprint3.backend.entity.Student;
+import com.sprint3.backend.model.SubscribeThesisDTO;
 
 @RestController
 @RequestMapping("/subscribe")
@@ -84,6 +85,18 @@ public class SubscribeThesisController {
     @GetMapping("/unsubscribe/{idCheckThesis}")
     public ResponseEntity<MessageDTO> unsubscribeThesis(@PathVariable Long idCheckThesis) {
         MessageDTO messageDTO = this.subscribeThesisService.unsubscribeThesis(idCheckThesis);
+        return new ResponseEntity<>(messageDTO, HttpStatus.OK);
+    }
+
+    /*
+     * create thesis
+     * @param idStudent, subscribeThesisDTO
+     * @return MessageDTO
+     * */
+    @PostMapping("/create/{idStudent}")
+    public ResponseEntity<MessageDTO> createThesis(@PathVariable Long idStudent,
+                                                   @RequestBody SubscribeThesisDTO subscribeThesisDTO) {
+        MessageDTO messageDTO = this.subscribeThesisService.createThesis(idStudent, subscribeThesisDTO);
         return new ResponseEntity<>(messageDTO, HttpStatus.OK);
     }
 }

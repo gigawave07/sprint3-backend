@@ -1,20 +1,19 @@
 package com.sprint3.backend.services.impl;
 
+import com.sprint3.backend.entity.*;
+import com.sprint3.backend.model.SubscribeThesisDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.sprint3.backend.model.MessageDTO;
-import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.repository.StudentRepository;
 import com.sprint3.backend.services.SubscribeThesisService;
-import com.sprint3.backend.entity.Thesis;
 import com.sprint3.backend.repository.CheckThesisRepository;
 import com.sprint3.backend.repository.ThesisRepository;
-import com.sprint3.backend.entity.CheckThesis;
-import com.sprint3.backend.entity.StudentGroup;
 
 @Service
 public class SubscribeThesisServiceImpl implements SubscribeThesisService {
@@ -101,6 +100,24 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
         return checkThesisListResult;
     }
 
+    private List<Thesis> getThesisOfTeacherCorresponding(Long idStudent) {
+        Long idTeacher = null;
+        Student student = this.studentRepository.findById(idStudent).orElse(null);
+        List<Thesis> thesisListOfTeacher = new ArrayList<>();
+        List<Thesis> thesisListExists = this.thesisRepository.findAll();
+        if (student != null) {
+            idTeacher = student.getStudentGroup().getTeacher().getId();
+        }
+        if (idTeacher != null) {
+            for (Thesis thesis : thesisListExists) {
+                if (thesis.getTeacher().getId().equals(idTeacher)) {
+                    thesisListOfTeacher.add(thesis);
+                }
+            }
+        }
+        return thesisListOfTeacher;
+    }
+
     /*
      * get thesis by id
      * @param idThesis
@@ -146,6 +163,7 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
                 checkThesis.setStudentGroup(null);
                 checkThesis.setThesis(null);
                 this.checkThesisRepository.save(checkThesis);
+                this.thesisRepository.delete(checkThesis.getThesis());
                 messageDTO.setMessage("Complete");
             } else {
                 messageDTO.setMessage("Failed");
@@ -156,21 +174,46 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
         return messageDTO;
     }
 
-    private List<Thesis> getThesisOfTeacherCorresponding(Long idStudent) {
-        Long idTeacher = null;
+    /*
+     * create thesis
+     * @param idStudent, subscribeThesisDTO
+     * @return MessageDTO
+     * */
+    @Override
+    public MessageDTO createThesis(Long idStudent, SubscribeThesisDTO subscribeThesisDTO) {
+        MessageDTO messageDTO = new MessageDTO();
+        StudentGroup studentGroup;
+        Teacher teacher;
         Student student = this.studentRepository.findById(idStudent).orElse(null);
-        List<Thesis> thesisListOfTeacher = new ArrayList<>();
-        List<Thesis> thesisListExists = this.thesisRepository.findAll();
         if (student != null) {
-            idTeacher = student.getStudentGroup().getTeacher().getId();
+            studentGroup = student.getStudentGroup();
+            teacher = studentGroup.getTeacher();
+
+            // create Thesis
+            Thesis thesis = createNewThesis(subscribeThesisDTO, teacher);
+
+            // create CheckThesis
+            createCheckThesis(studentGroup, thesis);
         }
-        if (idTeacher != null) {
-            for (Thesis thesis : thesisListExists) {
-                if (thesis.getTeacher().getId().equals(idTeacher)) {
-                    thesisListOfTeacher.add(thesis);
-                }
-            }
-        }
-        return thesisListOfTeacher;
+
+        return messageDTO;
+    }
+
+    private Thesis createNewThesis(SubscribeThesisDTO subscribeThesisDTO, Teacher teacher) {
+        Thesis thesis = new Thesis();
+        thesis.setStatement(subscribeThesisDTO.getStatement());
+        thesis.setAmount(subscribeThesisDTO.getAmount());
+        thesis.setDescription(subscribeThesisDTO.getDescription());
+        thesis.setTeacher(teacher);
+        thesis.setCreateDate(LocalDateTime.now());
+        this.thesisRepository.save(thesis);
+        return thesis;
+    }
+
+    private void createCheckThesis(StudentGroup studentGroup, Thesis thesis) {
+        CheckThesis checkThesis = new CheckThesis();
+        checkThesis.setThesis(thesis);
+        checkThesis.setStudentGroup(studentGroup);
+        this.checkThesisRepository.save(checkThesis);
     }
 }
