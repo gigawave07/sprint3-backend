@@ -10,7 +10,7 @@ public interface InstructionService {
     // --------------------------- Vinh start --------------------------------
     void save(Instruction instruction);
 
-    List<Instruction> findAllByPeriod(LocalDate startDate, LocalDate endDate);
+    List<Instruction> findAllByPeriod(LocalDate startDate, LocalDate endDatez);
 
     void delete(Long id);
 

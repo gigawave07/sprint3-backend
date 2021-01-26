@@ -1,6 +1,18 @@
+POST http://localhost:8080/check-thesis/find-by-student/1
+Accept: application/json
 
 ###
-DELETE http://localhost:8080/instruction/delete-instruction/3
+GET http://localhost:8080/period-time/find-by-date/2021-01-24
+Accept: application/json
+
+###
+GET http://localhost:8080/period-time/get-list
+Accept: application/json
+
+###
+
+###
+DELETE http://localhost:8080/instruction/delete-instruction/18
 Accept: application/json
 
 ###

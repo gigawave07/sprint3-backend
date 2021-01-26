@@ -17,7 +17,7 @@ public interface InstructionRepository extends JpaRepository<Instruction, Long> 
     // ------------------------ Vinh start -----------------------------------
     @Query(value = "select * from instruction where instruction.upload_date between :startDate and :endDate",
             nativeQuery = true)
-    List<Instruction> findAllByPeriod(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    List<Instruction> findAllByPeriod(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDatez);
 
     @Query(value = "delete from instruction where id = :instructionId", nativeQuery = true)
     @Modifying

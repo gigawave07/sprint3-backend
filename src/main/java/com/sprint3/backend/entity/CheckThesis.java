@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "check_thesis")
 @Getter
@@ -29,15 +30,16 @@ public class CheckThesis {
 
     // relationship
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "thesis_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private Thesis thesis;
 
-    @OneToOne(mappedBy = "checkThesis", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "checkThesis", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private ThesisDetail thesisDetail;
+    private List<ThesisDetail> thesisDetailList;
 
     @OneToOne
     @JoinColumn(name = "student_group_id", referencedColumnName = "id", columnDefinition = "BIGINT")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
     private StudentGroup studentGroup;
 }

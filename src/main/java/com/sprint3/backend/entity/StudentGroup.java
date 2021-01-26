@@ -30,7 +30,6 @@ public class StudentGroup {
     private String fileURL;
 
     // relationship
-
     @OneToMany(mappedBy = "studentGroup", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
     private java.util.List<Student> studentList;
@@ -40,6 +39,5 @@ public class StudentGroup {
     private Teacher teacher;
 
     @OneToOne(mappedBy = "studentGroup", cascade = CascadeType.ALL)
-    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
     private CheckThesis checkThesis;
 }
