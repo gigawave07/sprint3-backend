@@ -1,7 +1,5 @@
 package com.sprint3.backend.services.impl;
 
-import com.sprint3.backend.entity.*;
-import com.sprint3.backend.model.SubscribeThesisDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +12,8 @@ import com.sprint3.backend.repository.StudentRepository;
 import com.sprint3.backend.services.SubscribeThesisService;
 import com.sprint3.backend.repository.CheckThesisRepository;
 import com.sprint3.backend.repository.ThesisRepository;
+import com.sprint3.backend.entity.*;
+import com.sprint3.backend.model.SubscribeThesisDTO;
 
 @Service
 public class SubscribeThesisServiceImpl implements SubscribeThesisService {
@@ -32,7 +32,7 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
      * @return Student
      * */
     @Override
-    public Student findStudentCurrentlyLoggingById(Long idStudent) {
+    public Student findStudentById(Long idStudent) {
         return this.studentRepository.findById(idStudent).orElse(null);
     }
 
@@ -47,10 +47,10 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
      * @return List<Thesis>
      * */
     @Override
-    public List<Thesis> findAllThesisUnSubscribedByIdStudent(Long idStudent) {
+    public List<Thesis> findAllThesisUnSubscribed(Long idStudent) {
         boolean check;
         List<Thesis> thesisListResult = new ArrayList<>();
-        List<Thesis> thesisListOfTeacher = getThesisOfTeacherCorresponding(idStudent);
+        List<Thesis> thesisListOfTeacher = getThesisOfTeacher(idStudent);
         List<CheckThesis> checkThesisList = this.checkThesisRepository.findAll();
         for (Thesis thesis : thesisListOfTeacher) {
             check = true;
@@ -78,10 +78,10 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
      * @return List<Thesis>
      * */
     @Override
-    public List<CheckThesis> findAllThesisSubscribedByIdStudent(Long idStudent) {
+    public List<CheckThesis> findAllThesisSubscribed(Long idStudent) {
         boolean check;
         List<CheckThesis> checkThesisListResult = new ArrayList<>();
-        List<Thesis> thesisListOfTeacher = getThesisOfTeacherCorresponding(idStudent);
+        List<Thesis> thesisListOfTeacher = getThesisOfTeacher(idStudent);
         List<CheckThesis> checkThesisList = this.checkThesisRepository.findAll();
         for (CheckThesis checkThesis : checkThesisList) {
             check = false;
@@ -100,7 +100,7 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
         return checkThesisListResult;
     }
 
-    private List<Thesis> getThesisOfTeacherCorresponding(Long idStudent) {
+    private List<Thesis> getThesisOfTeacher(Long idStudent) {
         Long idTeacher = null;
         Student student = this.studentRepository.findById(idStudent).orElse(null);
         List<Thesis> thesisListOfTeacher = new ArrayList<>();
@@ -137,17 +137,21 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
     public MessageDTO subscribeThesisOfTeacher(Long idThesis, Long idStudent) {
         MessageDTO messageDTO = new MessageDTO();
         try {
-            CheckThesis checkThesis = new CheckThesis();
-            StudentGroup studentGroup = new StudentGroup();
             Student student = this.studentRepository.findById(idStudent).orElse(null);
             if (student != null) {
-                studentGroup = student.getStudentGroup();
+                if (student.getStudentGroup().getCheckThesis() == null) {
+                    CheckThesis checkThesis = new CheckThesis();
+                    checkThesis.setStatus(false);
+                    checkThesis.setThesis(thesisRepository.findById(idThesis).orElse(null));
+                    checkThesis.setStudentGroup(student.getStudentGroup());
+                    this.checkThesisRepository.save(checkThesis);
+                    messageDTO.setMessage("Subscribe thesis of teacher complete");
+                } else {
+                    messageDTO.setMessage("This group has subscribed to the thesis");
+                }
+            } else {
+                messageDTO.setMessage("Not found");
             }
-            checkThesis.setStatus(false);
-            checkThesis.setThesis(thesisRepository.findById(idThesis).orElse(null));
-            checkThesis.setStudentGroup(studentGroup);
-            this.checkThesisRepository.save(checkThesis);
-            messageDTO.setMessage("Complete");
         } catch (RuntimeException runtimeException) {
             messageDTO.setMessage("Failed");
         }
@@ -163,7 +167,6 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
                 checkThesis.setStudentGroup(null);
                 checkThesis.setThesis(null);
                 this.checkThesisRepository.save(checkThesis);
-                this.thesisRepository.delete(checkThesis.getThesis());
                 messageDTO.setMessage("Complete");
             } else {
                 messageDTO.setMessage("Failed");
@@ -182,38 +185,42 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
     @Override
     public MessageDTO createThesis(Long idStudent, SubscribeThesisDTO subscribeThesisDTO) {
         MessageDTO messageDTO = new MessageDTO();
-        StudentGroup studentGroup;
-        Teacher teacher;
-        Student student = this.studentRepository.findById(idStudent).orElse(null);
-        if (student != null) {
-            studentGroup = student.getStudentGroup();
-            teacher = studentGroup.getTeacher();
-
-            // create Thesis
-            Thesis thesis = createNewThesis(subscribeThesisDTO, teacher);
-
-            // create CheckThesis
-            createCheckThesis(studentGroup, thesis);
+        try {
+            Student student = this.studentRepository.findById(idStudent).orElse(null);
+            if (student != null) {
+                if (student.getStudentGroup().getCheckThesis() == null) {
+                    // create Thesis
+                    Thesis thesis = createNewThesis(subscribeThesisDTO, student);
+                    // create CheckThesis
+                    createCheckThesis(student, thesis);
+                    messageDTO.setMessage("Subscribe new thesis complete");
+                } else {
+                    messageDTO.setMessage("This group has subscribed to the thesis");
+                }
+            } else {
+                messageDTO.setMessage("Not found");
+            }
+        } catch (RuntimeException runtimeException) {
+            messageDTO.setMessage("Failed");
         }
-
         return messageDTO;
     }
 
-    private Thesis createNewThesis(SubscribeThesisDTO subscribeThesisDTO, Teacher teacher) {
+    private Thesis createNewThesis(SubscribeThesisDTO subscribeThesisDTO, Student student) {
         Thesis thesis = new Thesis();
         thesis.setStatement(subscribeThesisDTO.getStatement());
         thesis.setAmount(subscribeThesisDTO.getAmount());
         thesis.setDescription(subscribeThesisDTO.getDescription());
-        thesis.setTeacher(teacher);
+        thesis.setTeacher(student.getStudentGroup().getTeacher());
         thesis.setCreateDate(LocalDateTime.now());
         this.thesisRepository.save(thesis);
         return thesis;
     }
 
-    private void createCheckThesis(StudentGroup studentGroup, Thesis thesis) {
+    private void createCheckThesis(Student student, Thesis thesis) {
         CheckThesis checkThesis = new CheckThesis();
         checkThesis.setThesis(thesis);
-        checkThesis.setStudentGroup(studentGroup);
+        checkThesis.setStudentGroup(student.getStudentGroup());
         this.checkThesisRepository.save(checkThesis);
     }
 }
