@@ -2,7 +2,6 @@ package com.sprint3.backend.controllers;
 
 import com.sprint3.backend.model.StudentDTO;
 import com.sprint3.backend.model.StudentGroupDTO;
-import com.sprint3.backend.repository.TeacherRepository;
 import com.sprint3.backend.services.StudentGroupService;
 import com.sprint3.backend.services.StudentService;
 import com.sprint3.backend.services.TeacherService;
@@ -30,6 +29,7 @@ public class GroupController {
     @Autowired
     private TeacherService teacherService;
 
+    /*List student*/
     @RequestMapping(value = "/list-student-group/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<StudentDTO>> getAllStudentGroup(@PathVariable Long id) {
         Long idTeacher = this.teacherService.getIdTeacher(id);
