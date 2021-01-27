@@ -19,5 +19,4 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     @Query(value = "select * from instruction_status", nativeQuery = true)
     List<StudentGroupDTO> countQuantityStudent();
-
 }
