@@ -5,6 +5,6 @@ import com.sprint3.backend.entity.Teacher;
 import java.util.List;
 
 public interface TeacherService {
-//    Đạt
+    // Create by: Đạt
     List<Teacher> findAllTeacher();
 }

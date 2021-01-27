@@ -8,13 +8,8 @@ import com.sprint3.backend.model.StudentDTO;
 import java.util.List;
 
 public interface StudentService {
+    // Create by: Đạt _ Student
     List<Student> findAllStudent();
-
-    Student findByID(Long id);
-
-
-
-
     void saveStudent(StudentDTO studentDTO);
     List<Student> searchStudent (String inputSearch);
 }

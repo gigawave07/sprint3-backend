@@ -12,27 +12,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
+    // Create by: Đạt
     @Autowired
     private StudentRepository studentRepository;
-
-
     @Override
     public List<Student> findAllStudent() {
         return this.studentRepository.findAll();
     }
-
-    @Override
-    public Student findByID(Long id) {
-        return this.studentRepository.findById(id).orElse(null);
-    }
-
-
-
     @Override
     public void saveStudent(StudentDTO studentDTO) {
         Student student = new Student();
-        student.setStudentCode(studentDTO.getStudentCode());
-        student.setFullName(studentDTO.getFullName());
+        student.setStudentCode(studentDTO.getStudentCode().trim());
+        student.setFullName(studentDTO.getFullName().trim());
         student.setTeacher(studentDTO.getTeacher());
         student.setEmail(studentDTO.getEmail());
         student.setPhone(studentDTO.getPhone());

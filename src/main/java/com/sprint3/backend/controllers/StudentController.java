@@ -29,6 +29,7 @@ public class StudentController {
         this.studentService.saveStudent(studentDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    // Create by: Đạt _  Search Student
     @GetMapping("/inputSearch")
     public ResponseEntity<List<Student>> searchStudent(@RequestParam("valueSearch") String inputSearch) {
         List<Student> studentList = studentService.searchStudent(inputSearch);

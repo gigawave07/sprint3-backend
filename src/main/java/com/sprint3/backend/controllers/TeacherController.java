@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/teacher")
 @CrossOrigin
 public class TeacherController {
-//    Đạt
+    // Create by: Đạt
     @Autowired
     private TeacherService teacherService;
     @GetMapping("/list1")

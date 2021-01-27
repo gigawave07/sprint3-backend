@@ -7,8 +7,6 @@ import java.util.List;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
-    Student findByFullNameContaining(String fullName);
-
-    Student findByStudentCode(String studentCode);
+    // Create by: Đạt _  Search Student
     List<Student> findAllByFullNameContainingOrStudentCode(String fullName, String studentCode);
 }
