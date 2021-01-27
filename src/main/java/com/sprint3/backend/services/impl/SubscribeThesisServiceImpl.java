@@ -136,21 +136,33 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
     @Override
     public MessageDTO subscribeThesisOfTeacher(Long idThesis, Long idStudent) {
         MessageDTO messageDTO = new MessageDTO();
+        boolean check = true;
         try {
-            Student student = this.studentRepository.findById(idStudent).orElse(null);
-            if (student != null) {
-                if (student.getStudentGroup().getCheckThesis() == null) {
-                    CheckThesis checkThesis = new CheckThesis();
-                    checkThesis.setStatus(false);
-                    checkThesis.setThesis(thesisRepository.findById(idThesis).orElse(null));
-                    checkThesis.setStudentGroup(student.getStudentGroup());
-                    this.checkThesisRepository.save(checkThesis);
-                    messageDTO.setMessage("Subscribe thesis of teacher complete");
+            List<CheckThesis> checkThesisList = this.checkThesisRepository.findAll();
+            for (CheckThesis checkThesis : checkThesisList) {
+                if (checkThesis.getThesis().getId().equals(idThesis)) {
+                    check = false;
+                    break;
+                }
+            }
+            if (check) {
+                Student student = this.studentRepository.findById(idStudent).orElse(null);
+                if (student != null) {
+                    if (student.getStudentGroup().getCheckThesis() == null) {
+                        CheckThesis checkThesis = new CheckThesis();
+                        checkThesis.setStatus(false);
+                        checkThesis.setThesis(thesisRepository.findById(idThesis).orElse(null));
+                        checkThesis.setStudentGroup(student.getStudentGroup());
+                        this.checkThesisRepository.save(checkThesis);
+                        messageDTO.setMessage("Subscribe thesis of teacher complete");
+                    } else {
+                        messageDTO.setMessage("This group has subscribed to the thesis");
+                    }
                 } else {
-                    messageDTO.setMessage("This group has subscribed to the thesis");
+                    messageDTO.setMessage("Not found");
                 }
             } else {
-                messageDTO.setMessage("Not found");
+                messageDTO.setMessage("This thesis has been subscribed");
             }
         } catch (RuntimeException runtimeException) {
             messageDTO.setMessage("Failed");
@@ -164,10 +176,14 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
         try {
             CheckThesis checkThesis = this.checkThesisRepository.findById(idCheckThesis).orElse(null);
             if (checkThesis != null) {
-                checkThesis.setStudentGroup(null);
-                checkThesis.setThesis(null);
-                this.checkThesisRepository.save(checkThesis);
-                messageDTO.setMessage("Complete");
+                if (checkThesis.getStatus()) {
+                    messageDTO.setMessage("Cannot cancel because this thesis has been approved");
+                } else {
+                    checkThesis.setStudentGroup(null);
+                    checkThesis.setThesis(null);
+                    this.checkThesisRepository.save(checkThesis);
+                    messageDTO.setMessage("Complete");
+                }
             } else {
                 messageDTO.setMessage("Failed");
             }
