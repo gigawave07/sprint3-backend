@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity(name = "teacher")
 @Getter
@@ -31,7 +31,7 @@ public class Teacher {
     private String email;
 
     @Column(name = "identity_number", columnDefinition = "VARCHAR(50)")
-    private LocalDate identityNumber;
+    private String identityNumber;
 
     @Column(name = "phone", columnDefinition = "VARCHAR(50)")
     private String phone;
@@ -44,9 +44,13 @@ public class Teacher {
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private java.util.List<StudentGroup> studentGroupList;
+    private List<StudentGroup> studentGroupList;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private java.util.List<Thesis> thesisList;
+    private List<Thesis> thesisList;
+
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+    private List<News> newsList;
 }
