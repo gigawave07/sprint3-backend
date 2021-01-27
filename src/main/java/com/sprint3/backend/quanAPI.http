@@ -1,4 +1,4 @@
-GET http://localhost:8080/statistics/teacher
+GET http://localhost:8080/student/inputSearch?valueSearch=Ngân
 Accept: application/json
 
 ###
