@@ -45,13 +45,10 @@ public class AutoSendMailForStudent {
 
     @Scheduled(fixedDelay = 1000 * 3600 * 24)
     private void scheduleFixedDelayTask() {
-        System.out.println("System auto send mail start.");
         List<CheckThesis> allCheckThesis = this.subscribeThesisService.findAllCheckThesisForMail();
         List<CheckThesis> listCheckThesisNearExpired = new ArrayList<>();
         if (!allCheckThesis.isEmpty()) {
             filterCheckThesis(allCheckThesis, listCheckThesisNearExpired);
-        } else {
-            System.out.println("List check thesis is empty.");
         }
     }
 
@@ -94,7 +91,6 @@ public class AutoSendMailForStudent {
             Thread.sleep(300000);
             scheduleFixedDelayTask();
         }
-        System.out.println("Complete");
     }
 
     private void filterStudent(List<Student> studentListBeEmailed, CheckThesis checkThesis) {
