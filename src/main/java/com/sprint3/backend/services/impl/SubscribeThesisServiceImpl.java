@@ -36,6 +36,11 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
         return this.studentRepository.findById(idStudent).orElse(null);
     }
 
+    /*
+     * find all thesis
+     * @param nothing
+     * @return List<CheckThesis>
+     * */
     @Override
     public List<CheckThesis> findAllCheckThesisForMail() {
         return this.checkThesisRepository.findAll();
@@ -154,38 +159,15 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
                         checkThesis.setThesis(thesisRepository.findById(idThesis).orElse(null));
                         checkThesis.setStudentGroup(student.getStudentGroup());
                         this.checkThesisRepository.save(checkThesis);
-                        messageDTO.setMessage("Subscribe thesis of teacher complete");
+                        messageDTO.setMessage("Complete");
                     } else {
-                        messageDTO.setMessage("This group has subscribed to the thesis");
+                        messageDTO.setMessage("Duplicate");
                     }
                 } else {
                     messageDTO.setMessage("Not found");
                 }
             } else {
-                messageDTO.setMessage("This thesis has been subscribed");
-            }
-        } catch (RuntimeException runtimeException) {
-            messageDTO.setMessage("Failed");
-        }
-        return messageDTO;
-    }
-
-    @Override
-    public MessageDTO unsubscribeThesis(Long idCheckThesis) {
-        MessageDTO messageDTO = new MessageDTO();
-        try {
-            CheckThesis checkThesis = this.checkThesisRepository.findById(idCheckThesis).orElse(null);
-            if (checkThesis != null) {
-                if (checkThesis.getStatus()) {
-                    messageDTO.setMessage("Cannot cancel because this thesis has been approved");
-                } else {
-                    checkThesis.setStudentGroup(null);
-                    checkThesis.setThesis(null);
-                    this.checkThesisRepository.save(checkThesis);
-                    messageDTO.setMessage("Complete");
-                }
-            } else {
-                messageDTO.setMessage("Failed");
+                messageDTO.setMessage("Subscribed");
             }
         } catch (RuntimeException runtimeException) {
             messageDTO.setMessage("Error");
@@ -209,15 +191,43 @@ public class SubscribeThesisServiceImpl implements SubscribeThesisService {
                     Thesis thesis = createNewThesis(subscribeThesisDTO, student);
                     // create CheckThesis
                     createCheckThesis(student, thesis);
-                    messageDTO.setMessage("Subscribe new thesis complete");
+                    messageDTO.setMessage("Complete");
                 } else {
-                    messageDTO.setMessage("This group has subscribed to the thesis");
+                    messageDTO.setMessage("Duplicate");
                 }
             } else {
                 messageDTO.setMessage("Not found");
             }
         } catch (RuntimeException runtimeException) {
             messageDTO.setMessage("Failed");
+        }
+        return messageDTO;
+    }
+
+    /*
+     * unsubscribe thesis
+     * @param idCheckThesis
+     * @return MessageDTO
+     * */
+    @Override
+    public MessageDTO unsubscribeThesis(Long idCheckThesis) {
+        MessageDTO messageDTO = new MessageDTO();
+        try {
+            CheckThesis checkThesis = this.checkThesisRepository.findById(idCheckThesis).orElse(null);
+            if (checkThesis != null) {
+                if (checkThesis.getStatus()) {
+                    messageDTO.setMessage("Approved");
+                } else {
+                    checkThesis.setStudentGroup(null);
+                    checkThesis.setThesis(null);
+                    this.checkThesisRepository.save(checkThesis);
+                    messageDTO.setMessage("Complete");
+                }
+            } else {
+                messageDTO.setMessage("Not found");
+            }
+        } catch (RuntimeException runtimeException) {
+            messageDTO.setMessage("Error");
         }
         return messageDTO;
     }

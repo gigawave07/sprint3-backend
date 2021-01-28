@@ -63,7 +63,6 @@ public class AutoSendMailForStudent {
                 if (checkThesis.getCheckDate() != null) {
                     checkDate = checkThesis.getCheckDate().plusDays(7 * i);
                     Duration between = Duration.between(now, checkDate);
-                    System.out.println(between.toHours());
                     if (between.toHours() > 24) {
                         break;
                     }
@@ -115,7 +114,6 @@ public class AutoSendMailForStudent {
             String nameStudent = student.getFullName();
 
             helper.setTo(student.getEmail());
-            System.out.println(student.getEmail());
             helper.setSubject("Thông báo cập nhật tiến độ luận văn");
 
             String mailContent = "<!DOCTYPE html>\n" +
