@@ -14,4 +14,5 @@ public interface FeedBackService {
     List<FeedBackDTO> convertToListFeedBackDTO(List<Interaction> interactionList);
     FeedBackDTO getFeedBackDTOByID(Long idInteraction);
     void deleteInteractionByID(Long idInteraction);
+    Teacher getTeacherInfor(Long idAppAccount);
 }

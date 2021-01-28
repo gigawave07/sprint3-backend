@@ -2,6 +2,7 @@ package com.sprint3.backend.controllers;
 
 import com.sprint3.backend.entity.Interaction;
 import com.sprint3.backend.entity.Student;
+import com.sprint3.backend.entity.Teacher;
 import com.sprint3.backend.model.FeedBackDTO;
 import com.sprint3.backend.services.FeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,10 @@ public class FeedbackController {
     public ResponseEntity<FeedBackDTO> deleteQuestion(@PathVariable Long idQuestion){
         this.feedBackService.deleteInteractionByID(idQuestion);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/teacherInfo/{idAppAccount}")
+    public ResponseEntity<Teacher> getInfoTeacher(@PathVariable Long idAppAccount){
+        return new ResponseEntity<>(this.feedBackService.getTeacherInfor(idAppAccount),HttpStatus.OK);
     }
 }

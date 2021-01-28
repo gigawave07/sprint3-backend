@@ -2,9 +2,11 @@ package com.sprint3.backend.services.impl;
 
 import com.sprint3.backend.entity.Interaction;
 import com.sprint3.backend.entity.Student;
+import com.sprint3.backend.entity.Teacher;
 import com.sprint3.backend.model.FeedBackDTO;
 import com.sprint3.backend.repository.InteractionRepository;
 import com.sprint3.backend.repository.StudentRepository;
+import com.sprint3.backend.repository.TeacherRepository;
 import com.sprint3.backend.services.FeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import java.util.List;
 public class FeedBackServiceImpl implements FeedBackService {
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private TeacherRepository teacherRepository;
     @Autowired
     private InteractionRepository interactionRepository;
 
@@ -71,5 +75,10 @@ public class FeedBackServiceImpl implements FeedBackService {
         interaction.setStudent(null);
         this.interactionRepository.save(interaction);
         this.interactionRepository.deleteById(idInteraction);
+    }
+
+    @Override
+    public Teacher getTeacherInfor(Long idAppAccount) {
+        return this.teacherRepository.getTeacherInfoByIDAccount(idAppAccount);
     }
 }
