@@ -26,7 +26,7 @@ public class Thesis {
     private String statement;
 
     @Column(name = "amount", columnDefinition = "BIGINT")
-    private String amount;
+    private Long amount;
 
     @Column(name = "description", columnDefinition = "VARCHAR(250)")
     private String description;
