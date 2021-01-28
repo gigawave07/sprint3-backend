@@ -1,4 +1,8 @@
-POST http://localhost:8080/check-thesis/find-by-student/1
+GET http://localhost:8080/thesis-detail/check-thesis-detail/1
+Accept: application/json
+
+###
+GET http://localhost:8080/check-thesis/find-by-student/1
 Accept: application/json
 
 ###

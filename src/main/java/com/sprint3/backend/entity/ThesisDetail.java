@@ -58,6 +58,5 @@ public class ThesisDetail {
 
     @ManyToOne
     @JoinColumn(name = "check_thesis_id", referencedColumnName = "id", columnDefinition = "BIGINT")
-
     private CheckThesis checkThesis;
 }

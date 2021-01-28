@@ -7,4 +7,5 @@ import com.sprint3.backend.entity.CheckThesis;
 
 @Repository
 public interface CheckThesisReository extends JpaRepository<CheckThesis, Long> {
+
 }

@@ -12,24 +12,23 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/check-thesis")
 @CrossOrigin
 public class CheckThesisController {
-    @Autowired
-    private CheckThesisService checkThesisService;
+
 
     @Autowired
     private StudentService studentService;
 
-    // ------------------ VInh start -----------------------------
-    @PostMapping("/find-by-student/{studentId}")
+    // ------------------ VInh start -----------------------------------
+    @GetMapping("/find-by-student/{studentId}")
     public ResponseEntity<?> findByStudentId(@PathVariable Long studentId) {
         ThesisDetail thesisDetail = new ThesisDetail();
         Student student = this.studentService.findStudentById(studentId);
-        thesisDetail.setCheckThesis(student.getStudentGroup().getCheckThesis());
+        if (student.getStudentGroup() != null) {
+            if (student.getStudentGroup().getCheckThesis() != null) {
+                thesisDetail.setCheckThesis(student.getStudentGroup().getCheckThesis());
+            }
+        }
         return ResponseEntity.ok(thesisDetail);
     }
 
-//    @GetMapping("/get-list/{studentId}")
-//    public ResponseEntity<?> getList(@PathVariable Long studentId){
-//
-//    }
     // ------------------ VInh start -----------------------------
 }

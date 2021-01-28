@@ -12,11 +12,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/statistics")
 @CrossOrigin
 public class StatisticsController {
-    @Autowired
-    TeacherRepository teacherRepository;
-
-    @GetMapping("/teacher")
-    public ResponseEntity<?> teacher() {
-        return ResponseEntity.ok(teacherRepository.findAll());
-    }
 }
