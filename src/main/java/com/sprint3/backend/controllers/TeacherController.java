@@ -37,6 +37,7 @@ public class TeacherController {
         } else {
             teacherService.saveTeacher(teacher);
             return new ResponseEntity<>(HttpStatus.OK);
+            
         }
     }
 }
