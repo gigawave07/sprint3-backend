@@ -1,7 +1,11 @@
 package com.sprint3.backend.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+import com.sprint3.backend.entity.CheckThesis;
 import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.entity.StudentGroup;
 import com.sprint3.backend.entity.Teacher;
@@ -11,8 +15,6 @@ import com.sprint3.backend.repository.StudentGroupRepository;
 import com.sprint3.backend.repository.StudentRepository;
 import com.sprint3.backend.repository.TeacherRepository;
 import com.sprint3.backend.services.TeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -43,6 +45,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     /**
      * get list instructor
+     *
      * @return list studentGroup
      */
     @Override
@@ -52,6 +55,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     /**
      * sign Up Instructor
+     *
      * @param idTeacher
      * @param idStudent
      */
@@ -69,6 +73,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     /**
      * find IdStudent Logging
+     *
      * @param idStudent
      * @return
      */
@@ -79,6 +84,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     /**
      * cancel Teacher
+     *
      * @param idStudentGroup
      * @return
      */
