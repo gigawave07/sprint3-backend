@@ -1,4 +1,4 @@
-package com.sprint3.backend.model;
+package com.sprint3.backend.model.every_one;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
