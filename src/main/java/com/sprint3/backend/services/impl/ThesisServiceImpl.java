@@ -1,7 +1,10 @@
 package com.sprint3.backend.services.impl;
 
 
+import com.sprint3.backend.entity.CheckThesis;
 import com.sprint3.backend.entity.Thesis;
+import com.sprint3.backend.model.MessageDTO;
+import com.sprint3.backend.repository.CheckThesisRepository;
 import com.sprint3.backend.repository.ThesisRepository;
 import com.sprint3.backend.services.ThesisService;
 import com.sprint3.backend.services.search.SearchCriteria;
@@ -22,8 +25,11 @@ public class ThesisServiceImpl implements ThesisService {
     @Autowired
     ThesisRepository thesisRepository;
 
+    @Autowired
+    CheckThesisRepository checkThesisRepository;
+
     /**
-     *Lành start
+     * Lành start
      */
 
     @Override
@@ -44,9 +50,26 @@ public class ThesisServiceImpl implements ThesisService {
     }
 
     @Override
-    public void deleteByID(Long id) {
-        this.thesisRepository.deleteById(id);
+    public MessageDTO deleteByID(Long id) {
+        MessageDTO messageDTO = new MessageDTO();
+        try {
+            CheckThesis checkThesis = this.checkThesisRepository.findById(id).orElse(null);
+            Thesis thesis = new Thesis();
+            if (checkThesis == null) {
+                thesis.setId(id);
+                thesis.setTeacher(null);
+                this.thesisRepository.save(thesis);
+                this.thesisRepository.deleteById(thesis.getId());
+                messageDTO.setMessage("Complete");
+            } else {
+                messageDTO.setMessage("Failed");
+            }
+        } catch (RuntimeException runtimeException) {
+            messageDTO.setMessage("Error");
+        }
+        return messageDTO;
     }
+
 
     @Override
     public Thesis findById(Long id) {

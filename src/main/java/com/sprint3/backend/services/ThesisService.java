@@ -1,6 +1,7 @@
 package com.sprint3.backend.services;
 
 import com.sprint3.backend.entity.Thesis;
+import com.sprint3.backend.model.MessageDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -18,7 +19,7 @@ public interface ThesisService {
 
     void updateThesis(Thesis thesis);
 
-    void deleteByID(Long id);
+    MessageDTO deleteByID(Long id);
 
     Thesis findById(Long id);
 
@@ -27,6 +28,7 @@ public interface ThesisService {
     Page<Thesis> findThesisByCriteria(Specification<Thesis> spec, int page);
 
     List<Thesis> findAllThesis();
+
 
     /**
      * Lành end

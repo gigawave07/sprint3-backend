@@ -1,12 +1,14 @@
 package com.sprint3.backend.controllers;
 
 import com.sprint3.backend.entity.Thesis;
+import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.ThesisDTO;
 import com.sprint3.backend.services.ThesisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,14 +70,22 @@ public class ThesisController {
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<?> findUserById(@PathVariable Long id) {
+    public ResponseEntity<Thesis> findUserById(@PathVariable Long id) {
         return ResponseEntity.ok(thesisService.findById(id));
     }
 
+//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Thesis> deleteThesis(@PathVariable Long id) {
-        this.thesisService.deleteByID(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<MessageDTO> deleteThesis(@PathVariable Long id) {
+        MessageDTO messageDTO = this.thesisService.deleteByID(id);
+        return new ResponseEntity<>(messageDTO, HttpStatus.OK);
+//        try {
+//            MessageDTO messageDTO = this.thesisService.deleteByID(id);
+//            return 1;
+//        } catch (Exception e){
+//            e.getMessage();
+//        }
+//        return 0;
     }
 
     /**

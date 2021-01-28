@@ -8,4 +8,5 @@ import com.sprint3.backend.entity.Thesis;
 
 @Repository
 public interface ThesisRepository extends JpaRepository<Thesis, Long>, JpaSpecificationExecutor<Thesis> {
+
 }
