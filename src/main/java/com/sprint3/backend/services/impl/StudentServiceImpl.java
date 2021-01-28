@@ -28,6 +28,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void editStudent(Student student) {
+        this.studentRepository.save(student);
+    }
+
+    @Override
     public void saveStudent(StudentDTO studentDTO) {
         Student student = new Student();
         student.setStudentCode(studentDTO.getStudentCode());

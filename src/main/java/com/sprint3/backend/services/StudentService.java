@@ -18,5 +18,7 @@ public interface StudentService {
 
     List<Student> searchStudent(String inputSearch);
 
+    void editStudent(Student student);
+
     void save(Student student);
 }

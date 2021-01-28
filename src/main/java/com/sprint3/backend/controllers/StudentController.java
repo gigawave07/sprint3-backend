@@ -28,7 +28,7 @@ public class StudentController {
         return new ResponseEntity<>(listStudent, HttpStatus.OK);
     }
 
-    // Create by: Đạt _ Add new Student
+//     Create by: Đạt _ Add new Student
     @PostMapping("/addNew")
     public ResponseEntity<StudentDTO> AddNewStudent(@RequestBody StudentDTO studentDTO) {
         this.studentService.saveStudent(studentDTO);
@@ -68,12 +68,18 @@ public class StudentController {
 
     //edit student
     @PutMapping("/editStudent/{id}")
-    public ResponseEntity<?> editStudent(@RequestBody StudentDTO studentDTO, @PathVariable long id) {
+    public ResponseEntity<List<Student>> editStudent(@RequestBody StudentDTO studentDTO, @PathVariable long id) {
         Student student = studentService.findByID(id);
         if (student == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            this.studentService.saveStudent(studentDTO);
+            student.setStudentCode(studentDTO.getStudentCode());
+            student.setFullName(studentDTO.getFullName());
+            student.setTeacher(studentDTO.getTeacher());
+            student.setEmail(studentDTO.getEmail());
+            student.setPhone(studentDTO.getPhone());
+            student.setTopic(studentDTO.getTopic());
+            this.studentService.editStudent(student);
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
