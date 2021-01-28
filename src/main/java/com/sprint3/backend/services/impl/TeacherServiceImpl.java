@@ -79,14 +79,14 @@ public class TeacherServiceImpl implements TeacherService {
 
     /**
      * cancel Teacher
-     * @param id
+     * @param idStudentGroup
      * @return
      */
     @Override
-    public MessageDTO cancelTeacher(Long id) {
+    public MessageDTO cancelTeacher(Long idStudentGroup) {
         MessageDTO messageDTO = new MessageDTO();
         try {
-            StudentGroup studentGroup = this.studentGroupRepository.findById(id).orElse(null);
+            StudentGroup studentGroup = this.studentGroupRepository.findById(idStudentGroup).orElse(null);
             if (studentGroup != null) {
                 studentGroup.setTeacher(null);
                 this.studentGroupRepository.save(studentGroup);

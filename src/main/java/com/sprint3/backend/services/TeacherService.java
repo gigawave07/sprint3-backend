@@ -21,7 +21,7 @@ public interface TeacherService {
 
     void signUpTeacher(Long idTeacher, Long idStudent);
 
-    MessageDTO cancelTeacher(Long id);
+    MessageDTO cancelTeacher(Long idStudentGroup);
 
     /**
      * MaiHTQ end

@@ -6,7 +6,6 @@ import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.entity.Teacher;
 import com.sprint3.backend.model.every_one.MessageDTO;
 import com.sprint3.backend.model.maihtq.StudentGroupDTO;
-import com.sprint3.backend.services.StudentGroupService;
 import com.sprint3.backend.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +18,6 @@ import org.springframework.web.bind.annotation.*;
 public class TeacherController {
     @Autowired
     private TeacherService teacherService;
-
-    @Autowired
-    private StudentGroupService studentGroupService;
 
     /**
      * MaiHTQ Start
@@ -79,12 +75,12 @@ public class TeacherController {
 
     /**
      * cancel Teacher
-     * @param idTeacher
+     * @param idStudentGroup
      * @return messageDTO
      */
-    @GetMapping("/cancel/{idTeacher}")
-    public ResponseEntity<MessageDTO> cancelTeacher(@PathVariable Long idTeacher) {
-        MessageDTO messageDTO = this.teacherService.cancelTeacher(idTeacher);
+    @GetMapping("/cancel/{idStudentGroup}")
+    public ResponseEntity<MessageDTO> cancelTeacher(@PathVariable Long idStudentGroup) {
+        MessageDTO messageDTO = this.teacherService.cancelTeacher(idStudentGroup);
         return new ResponseEntity<>(messageDTO, HttpStatus.OK);
     }
 
