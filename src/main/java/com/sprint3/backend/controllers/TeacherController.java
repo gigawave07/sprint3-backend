@@ -21,7 +21,7 @@ public class TeacherController {
 //    Đạt
     @Autowired
     private TeacherService teacherService;
-    @GetMapping("/list1")
+    @GetMapping("/list")
     public ResponseEntity<?> getListTeacher() {
         List<Teacher> listTeacher = this.teacherService.findAllTeacher();
         return new ResponseEntity<>(listTeacher, HttpStatus.OK);

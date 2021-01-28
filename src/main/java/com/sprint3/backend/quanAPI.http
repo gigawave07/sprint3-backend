@@ -1,4 +1,23 @@
+
+###
+GET http://localhost:8080/student/findStudentById/6
+Accept: application/json
+
+###
+GET http://localhost:8080/student/prepareDeleteStudent/4
+Accept: application/json
+
+###
+DELETE http://localhost:8080/student/deleteStudent/4
+Accept: application/json
+
+
+###
 GET http://localhost:8080/student/inputSearch?valueSearch=Ngân
 Accept: application/json
 
 ###
+
+
+
+

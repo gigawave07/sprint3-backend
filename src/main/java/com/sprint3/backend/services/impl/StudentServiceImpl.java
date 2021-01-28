@@ -1,12 +1,8 @@
 package com.sprint3.backend.services.impl;
-
 import com.sprint3.backend.entity.Student;
-import com.sprint3.backend.entity.Teacher;
-import com.sprint3.backend.entity.Thesis;
 import com.sprint3.backend.model.StudentDTO;
 import com.sprint3.backend.repository.StudentRepository;
 import com.sprint3.backend.services.StudentService;
-import com.sprint3.backend.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -26,7 +22,10 @@ public class StudentServiceImpl implements StudentService {
         return this.studentRepository.findById(id).orElse(null);
     }
 
-
+    @Override
+    public void delete(Long id) {
+        this.studentRepository.deleteById(id);
+    }
 
     @Override
     public void saveStudent(StudentDTO studentDTO) {
@@ -43,4 +42,10 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> searchStudent(String inputSearch) {
         return studentRepository.findAllByFullNameContainingOrStudentCode(inputSearch, inputSearch);
     }
+
+    @Override
+    public void save(Student student) {
+        this.studentRepository.save(student);
+    }
+
 }

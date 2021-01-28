@@ -12,9 +12,11 @@ public interface StudentService {
 
     Student findByID(Long id);
 
-
-
+    void delete(Long id);
 
     void saveStudent(StudentDTO studentDTO);
-    List<Student> searchStudent (String inputSearch);
+
+    List<Student> searchStudent(String inputSearch);
+
+    void save(Student student);
 }
