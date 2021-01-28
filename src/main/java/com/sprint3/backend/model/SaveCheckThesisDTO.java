@@ -13,4 +13,7 @@ public class SaveCheckThesisDTO {
     Boolean status;
     String checkDate;
     String idCheckThesis;
+
+    String studentGroupId;
+    String thesisId;
 }
