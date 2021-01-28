@@ -5,11 +5,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import com.sprint3.backend.entity.CheckThesis;
 import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.entity.StudentGroup;
 import com.sprint3.backend.entity.Teacher;
-import com.sprint3.backend.model.every_one.MessageDTO;
+import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.maihtq.StudentGroupDTO;
 import com.sprint3.backend.repository.StudentGroupRepository;
 import com.sprint3.backend.repository.StudentRepository;
