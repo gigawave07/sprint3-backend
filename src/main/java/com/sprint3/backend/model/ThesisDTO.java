@@ -13,6 +13,6 @@ import lombok.Setter;
 public class ThesisDTO {
     private Long id;
     private String statement;
-    private String amount;
+    private Long amount;
     private String description;
 }

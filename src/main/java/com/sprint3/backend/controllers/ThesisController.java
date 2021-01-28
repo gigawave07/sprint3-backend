@@ -61,7 +61,7 @@ public class ThesisController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             thesis.setStatement(thesisDTO.getStatement().trim());
-            thesis.setAmount(thesisDTO.getAmount().trim());
+            thesis.setAmount(thesisDTO.getAmount());
             thesis.setDescription(thesisDTO.getDescription().trim());
             thesisService.updateThesis(thesis);
             return new ResponseEntity<>(HttpStatus.OK);
