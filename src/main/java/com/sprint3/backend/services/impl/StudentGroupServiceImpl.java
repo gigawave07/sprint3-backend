@@ -1,9 +1,10 @@
 package com.sprint3.backend.services.impl;
 
+import com.sprint3.backend.entity.CheckThesis;
 import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.entity.StudentGroup;
-import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.StudentGroupDTO;
+import com.sprint3.backend.repository.CheckThesisRepository;
 import com.sprint3.backend.repository.StudentGroupRepository;
 import com.sprint3.backend.repository.StudentRepository;
 import com.sprint3.backend.services.StudentGroupService;
@@ -22,8 +23,12 @@ public class StudentGroupServiceImpl implements StudentGroupService {
 
     @Autowired
     private StudentRepository studentRepository;
+
     @Autowired
     private StudentGroupRepository studentGroupRepository;
+
+    @Autowired
+    private CheckThesisRepository checkThesisRepository;
 
     @Override
     public List<StudentGroupDTO> findAll() {
@@ -46,14 +51,27 @@ public class StudentGroupServiceImpl implements StudentGroupService {
 
 
     @Override
-    public void deleteById(Long id) {
+    public void setNullStudent(Long id) {
         List<Student> studentList = this.findStudentGroup(id);
+        StudentGroup studentGroup = this.findById(id);
+        CheckThesis checkThesis = this.checkThesisRepository.findById(id).orElse(null);
+
+        studentGroup.setTeacher(null);
+        studentGroupRepository.save(studentGroup);
+
+        if (checkThesis != null){
+            studentGroup.getCheckThesis().setStudentGroup(null);
+            studentGroupRepository.save(studentGroup);
+        }
+
         for (Student student : studentList) {
             student.setStudentGroup(null);
             studentRepository.save(student);
         }
+
         studentGroupRepository.deleteById(id);
     }
+
 
     @Override
     public StudentGroup findById(Long id) {

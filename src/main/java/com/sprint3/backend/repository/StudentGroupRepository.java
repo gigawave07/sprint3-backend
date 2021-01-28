@@ -5,8 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.sprint3.backend.entity.StudentGroup;
 
-import java.util.List;
-
 @Repository
 public interface StudentGroupRepository extends JpaRepository<StudentGroup, Long> {
 }

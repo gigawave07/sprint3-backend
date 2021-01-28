@@ -37,7 +37,7 @@ public class GroupController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<StudentGroup> deleteGroup(@PathVariable Long id){
-        this.studentGroupService.deleteById(id);
+        this.studentGroupService.setNullStudent(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -15,15 +15,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     /**
      * Lành start
      */
-
     @Query(nativeQuery = true, value = "SELECT * FROM student where group_id =?;")
     List<Student> getListStudentByGroupID(Long idGroup);
-
-
-    @Modifying
-    @Query(nativeQuery = true, value = "UPDATE student SET group_id = null WHERE id = ?;")
-    Student resetIDGroup(Long id);
-
     /**
      * Lành end
      */

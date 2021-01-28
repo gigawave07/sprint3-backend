@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,18 +73,10 @@ public class ThesisController {
         return ResponseEntity.ok(thesisService.findById(id));
     }
 
-//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<MessageDTO> deleteThesis(@PathVariable Long id) {
         MessageDTO messageDTO = this.thesisService.deleteByID(id);
         return new ResponseEntity<>(messageDTO, HttpStatus.OK);
-//        try {
-//            MessageDTO messageDTO = this.thesisService.deleteByID(id);
-//            return 1;
-//        } catch (Exception e){
-//            e.getMessage();
-//        }
-//        return 0;
     }
 
     /**
