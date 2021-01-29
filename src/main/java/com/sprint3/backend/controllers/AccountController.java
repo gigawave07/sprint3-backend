@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/account")
 @CrossOrigin
 public class AccountController {
+    
 }
