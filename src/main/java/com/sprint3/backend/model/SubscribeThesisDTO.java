@@ -1,4 +1,4 @@
-package com.sprint3.backend.model.every_one;
+package com.sprint3.backend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MessageDTO {
-    String message;
+public class SubscribeThesisDTO {
+    String statement;
+    Long amount;
+    String description;
 }
