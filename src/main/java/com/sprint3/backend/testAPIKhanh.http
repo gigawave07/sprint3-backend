@@ -1,0 +1,38 @@
+PUT http://localhost:8080/admin/update-admin-info/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE2OTMzNzQsImlhdCI6MTYxMTY3NTM3NH0.jiDlx6wZKDm7CDOnSbu9Pj3jmg_0UXJ2hPd-OLk6wIHuAKmWmHidzQ6iU3iGMRNqvnAa7u-8S1NWkuTSmwZ46w
+
+{
+  "fullName": "Danh con be de",
+  "email": "danhbede@gmail.com",
+  "address": "Tam ky"
+}
+
+###
+PUT http://localhost:8080/account/change-password-user/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE2NzQyMTksImlhdCI6MTYxMTY1NjIxOX0.jhZk0zZAtrmh8ICYbj_oZ0welVhMLakrw7Us48c6b5wDQnh7NjExtj-AWmv-xyao-Y_BH7-pBce_pxdCP3KGLA
+
+{
+  "passwordNew": "Aqwerty1"
+}
+
+###
+PUT http://localhost:8080/account/check-passsword-user/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE2OTI0NzAsImlhdCI6MTYxMTY3NDQ3MH0._enZEmmbTZwze2rynSWB18KAO-uU9VCOyDPR27QLSkaiqt71xl9Ia0nzi9ez3LI_fW8LWVzTxv8u6p_gcvU_kA
+
+{
+  "passwordOld": "Aqwerty1"
+}
+
+###
+POST http://localhost:8080/authenticate
+Content-Type: application/json
+
+{
+  "username": "admin@gmail.com",
+  "password": "Aqwerty1"
+}
+
+###
