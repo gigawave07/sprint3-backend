@@ -1,7 +1,6 @@
 package com.sprint3.backend.controllers;
 
 import com.sprint3.backend.entity.AppAdmin;
-import com.sprint3.backend.model.AdminDTO;
 import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.services.AppAdminService;
 import org.springframework.beans.factory.annotation.Autowired;

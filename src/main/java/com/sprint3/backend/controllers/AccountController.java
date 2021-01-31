@@ -20,6 +20,12 @@ public class AccountController {
 
 //    nq.khanh start
 
+    @GetMapping("/find-account/{id}")
+    public ResponseEntity<AppAccount> findAccount(@PathVariable Long id) {
+        AppAccount appAccount = this.appAccountService.findAccountById(id);
+        return new ResponseEntity<>(appAccount, HttpStatus.OK);
+    }
+
     @PutMapping("/check-passsword-user/{id}")
     public Boolean checkPassword(@PathVariable Long id, @RequestBody ChangePasswordUserDTO changePasswordUserDTO
     ) {
