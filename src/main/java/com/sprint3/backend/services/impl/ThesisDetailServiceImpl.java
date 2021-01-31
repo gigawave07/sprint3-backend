@@ -24,5 +24,15 @@ public class ThesisDetailServiceImpl implements ThesisDetailService {
     public List<ThesisDetail> findAllByCheckThesisId(Long checkThesisId) {
         return this.thesisDetailRepository.findAllByCheckThesisId(checkThesisId);
     }
+
+    @Override
+    public List<ThesisDetail> findAll() {
+        return this.thesisDetailRepository.findAll();
+    }
+
+    @Override
+    public ThesisDetail findById(Long id) {
+        return this.thesisDetailRepository.findById(id).orElse(null);
+    }
     // ------------------------ Vinh start ----------------------------------
 }

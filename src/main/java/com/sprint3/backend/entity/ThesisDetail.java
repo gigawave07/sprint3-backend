@@ -54,6 +54,7 @@ public class ThesisDetail {
     @Column(name = "second_comment", columnDefinition = "VARCHAR(250)")
     private String secondComment;
 
+
     // relationship
 
     @ManyToOne

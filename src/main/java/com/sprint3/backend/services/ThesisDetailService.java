@@ -8,4 +8,8 @@ public interface ThesisDetailService {
     void save(ThesisDetail thesisDetail);
 
     List<ThesisDetail> findAllByCheckThesisId(Long checkThesisId);
+
+    List<ThesisDetail> findAll();
+
+    ThesisDetail findById(Long id);
 }
