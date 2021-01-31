@@ -1,3 +1,12 @@
+GET http://localhost:8080/account/find-account/1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE3NTI5NzEsImlhdCI6MTYxMTczNDk3MX0.vCzUaxde7tbUzB_ofuSMbNMdfDLjyFtLCF_oArtsSMM2VighmnF4YJriMhoGITy3UN0NjHUCCfSdNcx0gtMGCQ
+
+###
+GET http://localhost:8080/student/find-all/2
+Accept: application/json
+
+###
 PUT http://localhost:8080/admin/update-admin-info/1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE2OTMzNzQsImlhdCI6MTYxMTY3NTM3NH0.jiDlx6wZKDm7CDOnSbu9Pj3jmg_0UXJ2hPd-OLk6wIHuAKmWmHidzQ6iU3iGMRNqvnAa7u-8S1NWkuTSmwZ46w
@@ -11,7 +20,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJle
 ###
 PUT http://localhost:8080/account/change-password-user/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE2NzQyMTksImlhdCI6MTYxMTY1NjIxOX0.jhZk0zZAtrmh8ICYbj_oZ0welVhMLakrw7Us48c6b5wDQnh7NjExtj-AWmv-xyao-Y_BH7-pBce_pxdCP3KGLA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE3NDA0MTYsImlhdCI6MTYxMTcyMjQxNn0.9K-r50IKzNZPy6mppj84JM5hYLf9cWWcu3gUDgUlD09PXup9dTD0MLXnPGTlCLSBZvwxXXefP6UkTIgNiF8fNA
 
 {
   "passwordNew": "Aqwerty1"
@@ -20,7 +29,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJle
 ###
 PUT http://localhost:8080/account/check-passsword-user/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE2OTI0NzAsImlhdCI6MTYxMTY3NDQ3MH0._enZEmmbTZwze2rynSWB18KAO-uU9VCOyDPR27QLSkaiqt71xl9Ia0nzi9ez3LI_fW8LWVzTxv8u6p_gcvU_kA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE3NTI5NzEsImlhdCI6MTYxMTczNDk3MX0.vCzUaxde7tbUzB_ofuSMbNMdfDLjyFtLCF_oArtsSMM2VighmnF4YJriMhoGITy3UN0NjHUCCfSdNcx0gtMGCQ
 
 {
   "passwordOld": "Aqwerty1"
