@@ -30,6 +30,9 @@ public class StudentGroupServiceImpl implements StudentGroupService {
     @Autowired
     private CheckThesisRepository checkThesisRepository;
 
+    @Autowired
+    StudentGroupConverter studentGroupConverter;
+
     @Override
     public List<StudentGroupDTO> findAll() {
         List<StudentGroupDTO> studentGroupDTOList = new ArrayList<>();
@@ -81,4 +84,9 @@ public class StudentGroupServiceImpl implements StudentGroupService {
     /**
      * Lành end
      */
+
+    @Override
+    public StudentGroup save(StudentGroup studentGroup) {
+        return this.studentGroupRepository.save(studentGroup);
+    }
 }

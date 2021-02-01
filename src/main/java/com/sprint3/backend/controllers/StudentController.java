@@ -17,6 +17,7 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+    @Autowired
     private AppAccountService appAccountService;
 
 
@@ -90,4 +91,42 @@ public class StudentController {
     }
     //Hoàng end
 
+    /**
+     * Quoc Controller
+     * search Student no group
+     */
+    @GetMapping("/studentNoGroup")
+    public List<Student> getAllStudentNoGroup(
+            @RequestParam String by,
+            @RequestParam String search) {
+        List<Student> students = this.studentService.search(search, by);
+        return students;
+    }
+
+    /**
+     * Quoc Controller
+     * @return studentListNoGr
+     */
+    @GetMapping("/listAllStudentNoGroup")
+    public List<Student> getAllStudentNoGr(){
+        try {
+            List<Student> studentList = this.studentService.findAllStudentNoGroup();
+            return studentList;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    /**
+     * Quoc Controller
+     * getStudent by id
+     *
+     */
+    @GetMapping("/studentById/{studentId}")
+    public Student getStudentById(@PathVariable("studentId") Long id) {
+        return this.studentService.findById(id);
+    }
+    // end quoc
 }

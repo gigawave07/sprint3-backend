@@ -6,7 +6,6 @@ import com.sprint3.backend.entity.Thesis;
 import com.sprint3.backend.model.StudentDTO;
 import com.sprint3.backend.repository.StudentRepository;
 import com.sprint3.backend.services.StudentService;
-import com.sprint3.backend.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -55,5 +54,52 @@ public class StudentServiceImpl implements StudentService {
     public void save(Student student) {
         this.studentRepository.save(student);
     }
+    @Override
+    public List<Student> findAllStudentNoGroup() {
+        return this.studentRepository.findAllStudentNoGroup();
+    }
 
+    /**
+     * Quoc Service
+     *
+     * @param
+     * @return Student
+     */
+    @Override
+    public List<Student> search(String search, String by) {
+//        Page<Student> students = this.studentRepository.findAllStudentNoGroup(pageable);
+        List<Student> students = null;
+        switch (by) {
+            case "all":
+                students = this.studentRepository.findStudentNoGroupByEmailAndStudentCodeAndFullName(search);
+                break;
+            case "fullName":
+                students = this.studentRepository.findStudentNoGroupByFullName(search);
+                break;
+            case "email":
+                students = this.studentRepository.findStudentNoGroupByEmail(search);
+                break;
+            case "studentCode":
+                students = this.studentRepository.findStudentNoGroupByStudentCode(search);
+                break;
+        }
+        return students;
+    }
+    /**
+     * Quoc Service
+     *
+     * @param id
+     * @return Student
+     */
+    @Override
+    public Student findById(Long id) {
+
+        return this.studentRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Student saveQuoc(Student student) {
+        return this.studentRepository.save(student);
+    }
+    //end quoc
 }

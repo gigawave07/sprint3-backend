@@ -32,4 +32,19 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
      */
     // Create by: Đạt _  Search Student
     List<Student> findAllByFullNameContainingOrStudentCode(String fullName, String studentCode);
+    /**
+     * Quoc Repository
+     * @return
+     */
+    @Query(value="select * from student where student.group_id is null",nativeQuery = true)
+    List<Student> findAllStudentNoGroup();
+    @Query(value="select * from  project3_thesis_management.student  where student.group_id is null and  (project3_thesis_management.student.email like %?1% or project3_thesis_management.student.full_name like %?1% or project3_thesis_management.student.student_code like %?1% )  " , nativeQuery = true)
+    List<Student> findStudentNoGroupByEmailAndStudentCodeAndFullName(String search);
+    @Query(value="select * from  student  where student.group_id is null and student.email like %?1%" , nativeQuery = true)
+    List<Student> findStudentNoGroupByEmail(String search);
+    @Query(value="select * from  student  where student.group_id is null and student.full_name like %?1%" , nativeQuery = true)
+    List<Student> findStudentNoGroupByFullName(String fullName);
+    @Query(value="select * from  student  where student.group_id is null and student.student_code like %?1%" , nativeQuery = true)
+    List<Student> findStudentNoGroupByStudentCode(String studentCode);
+    // end quoc
 }

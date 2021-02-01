@@ -23,4 +23,6 @@ public interface StudentGroupService {
     /**
      * Lành end
      */
+    StudentGroup save(StudentGroup studentGroup);
+
 }

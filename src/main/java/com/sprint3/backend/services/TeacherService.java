@@ -28,4 +28,12 @@ public interface TeacherService {
      */
     // Create by: Đạt
     List<Teacher> findAllTeacher();
+
+    /**
+     * quoc sử dụng
+     * @param id
+     * @return Teacher
+     */
+    Teacher findTeacherById(Long id);
+
 }
