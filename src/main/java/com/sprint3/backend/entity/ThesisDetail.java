@@ -19,17 +19,32 @@ public class ThesisDetail {
     @Column(name = "id", columnDefinition = "BIGINT")
     private Long id;
 
-    @Column(name = "progress_file", columnDefinition = "VARCHAR(250)")
-    private String progressFile;
+    @Column(name = "first_progress_file", columnDefinition = "VARCHAR(250)")
+    private String firstProgressFile;
 
-    @Column(name = "description", columnDefinition = "VARCHAR(250)")
-    private String description;
+    @Column(name = "second_progress_file", columnDefinition = "VARCHAR(250)")
+    private String secondProgressFile;
+
+    @Column(name = "fisrt_file_url", columnDefinition = "TEXT")
+    private String firstFileUrl;
+
+    @Column(name = "second_file_url", columnDefinition = "TEXT")
+    private String secondFileUrl;
+
+    @Column(name = "first_description", columnDefinition = "VARCHAR(250)")
+    private String firstDescription;
+
+    @Column(name = "second_description", columnDefinition = "VARCHAR(250)")
+    private String secondDescription;
 
     @Column(name = "percent", columnDefinition = "DOUBLE")
     private Double percent;
 
-    @Column(name = "submit_date", columnDefinition = "DATETIME")
-    private LocalDateTime submitDate;
+    @Column(name = "first_submit_date", columnDefinition = "DATETIME")
+    private LocalDateTime firstSubmitDate;
+
+    @Column(name = "second_submit_date", columnDefinition = "DATETIME")
+    private LocalDateTime secondSubmitDate;
 
     @Column(name = "comment", columnDefinition = "VARCHAR(250)")
     private String firstComment;

@@ -102,4 +102,17 @@ public class StudentServiceImpl implements StudentService {
         return this.studentRepository.save(student);
     }
     //end quoc
+
+      // ---------------------- VInh start ---------------------------
+    @Override
+    public Student findStudentById(Long studentId) {
+        return this.studentRepository.findById(studentId).orElse(null);
+    }
+
+    @Override
+    public Student findStudentByAccountId(Long accountId) {
+        return this.studentRepository.findByAppAccountId(accountId);
+    }
+
+    // ---------------------- VInh end ---------------------------
 }

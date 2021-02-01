@@ -47,4 +47,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query(value="select * from  student  where student.group_id is null and student.student_code like %?1%" , nativeQuery = true)
     List<Student> findStudentNoGroupByStudentCode(String studentCode);
     // end quoc
+    // -------------- VInh start ---------------------------------
+    Student findByAppAccountId(Long accountId);
+    // -------------- VInh start ---------------------------------
 }
