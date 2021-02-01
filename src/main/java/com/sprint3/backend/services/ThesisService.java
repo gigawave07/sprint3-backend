@@ -17,7 +17,7 @@ public interface ThesisService {
 
     void createNewThesis(Thesis thesis);
 
-    void updateThesis(Thesis thesis); 
+    void updateThesis(Thesis thesis);
 
     MessageDTO deleteByID(Long id);
 
