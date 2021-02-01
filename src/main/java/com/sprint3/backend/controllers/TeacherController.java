@@ -8,9 +8,12 @@ import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.maihtq.StudentGroupDTO;
 import com.sprint3.backend.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
+
 
 @RestController
 @RequestMapping("/teacher")

@@ -44,7 +44,7 @@ public class StudentGroupServiceImpl implements StudentGroupService {
             studentGroupDTO.setId(studentGroup.getId());
             studentGroupDTO.setGroupName(studentGroup.getGroupName());
             studentGroupDTO.setQuantity(studentGroup.getQuantity());
-            studentGroupDTOList.add(studentGroupDTO); 
+            studentGroupDTOList.add(studentGroupDTO);
         }
         return studentGroupDTOList;
     }
