@@ -1,19 +1,23 @@
 package com.sprint3.backend.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+
 import com.sprint3.backend.entity.AppAccount;
 import com.sprint3.backend.entity.Teacher;
 import com.sprint3.backend.repository.AppAccountRepository;
 import com.sprint3.backend.repository.AppRoleRepository;
 import com.sprint3.backend.repository.TeacherRepository;
 import com.sprint3.backend.services.TeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
+
     @Autowired
     private AppRoleRepository appRoleRepository;
     @Autowired
@@ -25,19 +29,18 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher findByID(Long id) {
-        return this.teacherRepository.findById(id).orElse(null);
-    }
-
-    @Override
     public void saveTeacher(Teacher teacher) {
-        this.teacherRepository.save(teacher);
-        AppAccount appAccount = new AppAccount();
-        appAccount.setAppRole(this.appRoleRepository.findById((long) 1).orElse(null));
-        appAccount.setUsername(teacher.getTeacherCode());
-        appAccount.setPassword("123");
-        appAccount.setEnabled(true);
-        this.appAccountRepository.save(appAccount);
+        try {
+            this.teacherRepository.save(teacher);
+            AppAccount appAccount = new AppAccount();
+            appAccount.setAppRole(this.appRoleRepository.findById((long) 1).orElse(null));
+            appAccount.setUsername(teacher.getTeacherCode());
+            appAccount.setPassword("123");
+            appAccount.setEnabled(true);
+            this.appAccountRepository.save(appAccount);
+        } catch (RuntimeException runtimeException) {
+            runtimeException.printStackTrace();
+        }
 
     }
 
@@ -56,10 +59,5 @@ public class TeacherServiceImpl implements TeacherService {
                 return teacherRepository.getTeachersByPhone(key);
         }
         return null;
-    }
-
-    @Override
-    public List<Teacher> get(String inputCompare) {
-        return teacherRepository.getTeacherCode(inputCompare);
     }
 }
