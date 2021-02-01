@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/check-thesis")
 @CrossOrigin
-public class CheckThesisController { 
+public class CheckThesisController {
 }
