@@ -19,4 +19,9 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     @Query(value = "select * from instruction_status", nativeQuery = true)
     List<StudentGroupDTO> countQuantityStudent();
+    /**
+     * Nhật start
+     */
+    @Query(nativeQuery = true, value = "SELECT * FROM teacher where app_account_id = ?;")
+    Teacher getTeacherInfoByIDAccount(Long idAccount);
 }
