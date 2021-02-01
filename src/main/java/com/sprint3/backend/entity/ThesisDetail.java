@@ -58,11 +58,7 @@ public class ThesisDetail {
     @Column(name = "second_report", columnDefinition = "VARCHAR(250)")
     private String secondReport;
 
-
-
-
     // relationship
-
     @OneToOne
     @JoinColumn(name = "check_thesis_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private CheckThesis checkThesis;
