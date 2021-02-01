@@ -91,7 +91,7 @@ public class ThesisDetailController {
 
         }
         this.thesisDetailService.save(thesisDetail);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.ok(new MessageDTO("upload success"));
     }
 
     @GetMapping("/get-thesis-detail-list")
@@ -111,6 +111,8 @@ public class ThesisDetailController {
             thesisDetailDTO.setSecondComment(thesisDetail.getSecondComment());
             thesisDetailDTO.setFirstFileUrl(thesisDetail.getFirstFileUrl());
             thesisDetailDTO.setSecondFileUrl(thesisDetail.getSecondFileUrl());
+            thesisDetailDTO.setFirstDescription(thesisDetail.getFirstDescription());
+            thesisDetailDTO.setSecondDescription(thesisDetail.getSecondDescription());
             thesisDetailDTOList.add(thesisDetailDTO);
         }
         return ResponseEntity.ok(thesisDetailDTOList);
@@ -120,6 +122,31 @@ public class ThesisDetailController {
     public ResponseEntity<?> getStudentId(@PathVariable Long accountId) {
         Student student = this.studentService.findStudentByAccountId(accountId);
         return student.getId() != null ? ResponseEntity.ok(student.getId()) : ResponseEntity.ok(new MessageDTO("Not exist"));
+    }
+
+    @GetMapping("/get-list-student/{thesisDetailId}")
+    public ResponseEntity<?> getListStudent(@PathVariable Long thesisDetailId) {
+        ThesisDetail thesisDetail = this.thesisDetailService.findById(thesisDetailId);
+        List<Student> studentList = new ArrayList<>();
+        if (thesisDetail.getCheckThesis() != null) {
+            if (thesisDetail.getCheckThesis().getStudentGroup() != null) {
+                studentList = thesisDetail.getCheckThesis().getStudentGroup().getStudentList();
+            }
+        }
+        return ResponseEntity.ok(studentList);
+    }
+
+    @PostMapping("upload-comment/{thesisDetailId}")
+    public ResponseEntity<?> uploadComment(@RequestBody ThesisDetail uploadComment, @PathVariable Long thesisDetailId) {
+        ThesisDetail thesisDetail = this.thesisDetailService.findById(thesisDetailId);
+        if (uploadComment.getFirstComment() != ""&&uploadComment.getFirstComment() != null) {
+            thesisDetail.setFirstComment(uploadComment.getFirstComment());
+        }
+        if (uploadComment.getSecondComment() != "" && uploadComment.getSecondComment() != null) {
+            thesisDetail.setSecondComment(uploadComment.getSecondComment());
+        }
+        this.thesisDetailService.save(thesisDetail);
+        return ResponseEntity.ok(new MessageDTO("upload success"));
     }
 
     // ---------------------- Vinh end -----------------------------
