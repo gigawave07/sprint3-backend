@@ -4,8 +4,6 @@ import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.repository.StudentRepository;
 import com.sprint3.backend.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,8 +51,15 @@ public class StudentServiceImpl implements StudentService {
         return students;
     }
 
+    /**
+     * Quoc Service
+     *
+     * @param id
+     * @return Student
+     */
     @Override
     public Student findById(Long id) {
+
         return this.studentRepository.findById(id).orElse(null);
     }
 
@@ -62,4 +67,5 @@ public class StudentServiceImpl implements StudentService {
     public Student save(Student student) {
         return this.studentRepository.save(student);
     }
+    //end quoc
 }
