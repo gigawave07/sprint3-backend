@@ -1,6 +1,7 @@
 package com.sprint3.backend.controllers;
 
 import com.sprint3.backend.entity.CheckThesis;
+import com.sprint3.backend.entity.DTO.MessageDTO;
 import com.sprint3.backend.entity.DTO.ThesisDetailDTO;
 import com.sprint3.backend.entity.DTO.ThesisDetailVinhDTO;
 import com.sprint3.backend.entity.Student;
@@ -98,8 +99,9 @@ public class ThesisDetailController {
         List<ThesisDetail> thesisDetailList;
         thesisDetailList = this.thesisDetailService.findAll();
         List<ThesisDetailDTO> thesisDetailDTOList = new ArrayList<>();
-        ThesisDetailDTO thesisDetailDTO = new ThesisDetailDTO();
+        ThesisDetailDTO thesisDetailDTO;
         for (ThesisDetail thesisDetail : thesisDetailList) {
+            thesisDetailDTO = new ThesisDetailDTO();
             thesisDetailDTO.setId(thesisDetail.getId());
             thesisDetailDTO.setGroupName(thesisDetail.getCheckThesis().getStudentGroup().getGroupName());
             thesisDetailDTO.setThesisName(thesisDetail.getCheckThesis().getThesis().getStatement());
@@ -112,6 +114,12 @@ public class ThesisDetailController {
             thesisDetailDTOList.add(thesisDetailDTO);
         }
         return ResponseEntity.ok(thesisDetailDTOList);
+    }
+
+    @GetMapping("/get-student-id/{accountId}")
+    public ResponseEntity<?> getStudentId(@PathVariable Long accountId) {
+        Student student = this.studentService.findStudentByAccountId(accountId);
+        return student.getId() != null ? ResponseEntity.ok(student.getId()) : ResponseEntity.ok(new MessageDTO("Not exist"));
     }
 
     // ---------------------- Vinh end -----------------------------
