@@ -16,5 +16,10 @@ public class StudentServiceImpl implements StudentService {
         return this.studentRepository.findById(studentId).orElse(null);
     }
 
+    @Override
+    public Student findStudentByAccountId(Long accountId) {
+        return this.studentRepository.findByAppAccountId(accountId);
+    }
+
     // ---------------------- VInh end ---------------------------
 }

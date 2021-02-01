@@ -6,5 +6,7 @@ public interface StudentService {
     // ---------------------- VInh start ---------------------------
     Student findStudentById(Long studentId);
 
+    Student findStudentByAccountId(Long accountId);
+
     // ---------------------- VInh start ---------------------------
 }
