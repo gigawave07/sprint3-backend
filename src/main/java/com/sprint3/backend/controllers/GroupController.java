@@ -82,7 +82,7 @@ public class GroupController {
             Long idStudentLeader  =  groupStudentDTOQuoc.getLeaderGroupId();
             StudentGroup studentGroup = new StudentGroup();
             Long quantity = Long.valueOf(students.size());
-            studentGroup.setQuantity(quantity);
+            studentGroup.setQuantity(String.valueOf(quantity));
             studentGroup.setTeacher(teacher);
             String groupName = groupStudentDTOQuoc.getGroupName();
             studentGroup.setGroupName(groupName);;

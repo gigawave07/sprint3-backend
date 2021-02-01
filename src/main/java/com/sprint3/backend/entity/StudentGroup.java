@@ -24,7 +24,7 @@ public class StudentGroup {
     private String groupName;
 
     @Column(name = "quantity", columnDefinition = "BIGINT")
-    private Long quantity;
+    private String quantity;
 
     @Column(name = "file_url", columnDefinition = "VARCHAR(250)")
     private String fileURL;
