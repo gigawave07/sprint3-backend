@@ -21,9 +21,9 @@ public class AccountController {
 //    nq.khanh start
 
     @GetMapping("/find-account/{id}")
-    public ResponseEntity<AppAccount> findAccount(@PathVariable Long id) {
+    public ResponseEntity<?> findAccount(@PathVariable Long id) {
         AppAccount appAccount = this.appAccountService.findAccountById(id);
-        return new ResponseEntity<>(appAccount, HttpStatus.OK);
+        return ResponseEntity.ok(appAccount);
     }
 
     @PutMapping("/check-passsword-user/{id}")

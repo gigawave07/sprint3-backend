@@ -16,9 +16,11 @@ public class ThesisDetailDTO {
     String groupName;
     String thesisName;
     LocalDateTime firstSubmitDate;
+    String firstDescription;
     String firstFileUrl;
     String firstComment;
     LocalDateTime secondSubmitDate;
     String secondFileUrl;
+    String secondDescription;
     String secondComment;
 }
