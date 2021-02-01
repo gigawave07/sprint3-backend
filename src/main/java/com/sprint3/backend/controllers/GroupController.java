@@ -2,6 +2,7 @@ package com.sprint3.backend.controllers;
 
 import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.entity.StudentGroup;
+import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.StudentGroupDTO;
 import com.sprint3.backend.services.StudentGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,9 +55,9 @@ public class GroupController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<StudentGroup> deleteGroup(@PathVariable Long id){
-        this.studentGroupService.setNullStudent(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<MessageDTO> deleteGroup(@PathVariable Long id){
+        MessageDTO messageDTO = this.studentGroupService.setNullStudent(id);
+        return new ResponseEntity<>(messageDTO, HttpStatus.OK);
     }
 
     @GetMapping("/findBy/{id}")

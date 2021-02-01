@@ -1,8 +1,10 @@
 package com.sprint3.backend.controllers;
 
+import com.sprint3.backend.entity.Teacher;
 import com.sprint3.backend.entity.Thesis;
 import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.ThesisDTO;
+import com.sprint3.backend.services.TeacherService;
 import com.sprint3.backend.services.ThesisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ThesisController {
     @Autowired
     ThesisService thesisService;
+
+    @Autowired
+    TeacherService teacherService;
 
     /**
      *Lành start
@@ -52,8 +57,10 @@ public class ThesisController {
         return ResponseEntity.ok(thesisList);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<List<Thesis>> addNewThesis(@RequestBody Thesis thesis) {
+    @PostMapping("/add/{teacherId}")
+    public ResponseEntity<List<Thesis>> addNewThesis(@RequestBody Thesis thesis,@PathVariable("teacherId") Long id) {
+        Teacher teacher = this.teacherService.findByTeacherId(id);
+        thesis.setTeacher(teacher);
         this.thesisService.createNewThesis(thesis);
         return new ResponseEntity<>(HttpStatus.OK);
     }

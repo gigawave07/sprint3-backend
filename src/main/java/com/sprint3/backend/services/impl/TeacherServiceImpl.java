@@ -123,4 +123,15 @@ public class TeacherServiceImpl implements TeacherService {
         return this.teacherRepository.findById(id).orElse(null);
     }
     // end quốc
+
+    /**
+     * Lành merge thêm 5k
+     * @param id
+     * @return
+     */
+    @Override
+    public Teacher findByTeacherId(Long id) {
+        return teacherRepository.findById(id).orElse(null);
+    }
+
 }

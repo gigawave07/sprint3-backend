@@ -36,4 +36,14 @@ public interface TeacherService {
      */
     Teacher findTeacherById(Long id);
 
+    /**
+     * Lành start
+     * @param id
+     * @return teacher
+     */
+    Teacher findByTeacherId(Long id);
+
+    /**
+     * lành end
+     */
 }
