@@ -21,7 +21,7 @@ public class TeacherController {
 
     /**
      * MaiHTQ Start
-     * 
+     *
      * getListTeacher
      * @return teacherList
      */
@@ -87,4 +87,11 @@ public class TeacherController {
     /**
      * MaiHTQ end
      */
+    // Create by: Đạt
+       @GetMapping("/list1")
+    public ResponseEntity<?> getListTeacher() {
+        List<Teacher> listTeacher = this.teacherService.findAllTeacher();
+        return new ResponseEntity<>(listTeacher, HttpStatus.OK);
+    }
+
 }

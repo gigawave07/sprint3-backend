@@ -14,6 +14,8 @@ import com.sprint3.backend.repository.StudentGroupRepository;
 import com.sprint3.backend.repository.StudentRepository;
 import com.sprint3.backend.repository.TeacherRepository;
 import com.sprint3.backend.services.TeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -108,4 +110,9 @@ public class TeacherServiceImpl implements TeacherService {
     /**
      * MaiHTQ end
      */
+    // Create by: Đạt
+     @Override
+    public List<Teacher> findAllTeacher() {
+        return this.teacherRepository.findAll();
+    }
 }

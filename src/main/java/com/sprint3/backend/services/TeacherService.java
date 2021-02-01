@@ -26,4 +26,6 @@ public interface TeacherService {
     /**
      * MaiHTQ end
      */
+    // Create by: Đạt
+    List<Teacher> findAllTeacher();
 }
