@@ -73,11 +73,11 @@ public class StudentController {
         if (student == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            student.setStudentCode(studentDTO.getStudentCode());
-            student.setFullName(studentDTO.getFullName());
+            student.setStudentCode(studentDTO.getStudentCode().trim());
+            student.setFullName(studentDTO.getFullName().trim());
             student.setTeacher(studentDTO.getTeacher());
-            student.setEmail(studentDTO.getEmail());
-            student.setPhone(studentDTO.getPhone());
+            student.setEmail(studentDTO.getEmail().trim());
+            student.setPhone(studentDTO.getPhone().trim());
             student.setTopic(studentDTO.getTopic());
             this.studentService.editStudent(student);
             return new ResponseEntity<>(HttpStatus.OK);
