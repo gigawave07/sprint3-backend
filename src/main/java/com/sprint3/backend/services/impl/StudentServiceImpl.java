@@ -19,6 +19,22 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findAllStudent() {
         return this.studentRepository.findAll();
     }
+
+    @Override
+    public Student findByID(Long id) {
+        return this.studentRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.studentRepository.deleteById(id);
+    }
+
+    @Override
+    public void editStudent(Student student) {
+        this.studentRepository.save(student);
+    }
+
     @Override
     public void saveStudent(StudentDTO studentDTO) {
         Student student = new Student();
@@ -34,4 +50,10 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> searchStudent(String inputSearch) {
         return studentRepository.findAllByFullNameContainingOrStudentCode(inputSearch, inputSearch);
     }
+
+    @Override
+    public void save(Student student) {
+        this.studentRepository.save(student);
+    }
+
 }

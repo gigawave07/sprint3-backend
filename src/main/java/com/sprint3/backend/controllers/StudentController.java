@@ -2,6 +2,7 @@ package com.sprint3.backend.controllers;
 
 import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.model.StudentDTO;
+import com.sprint3.backend.services.AppAccountService;
 import com.sprint3.backend.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,8 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+    private AppAccountService appAccountService;
+
 
     // Create by: Đạt _ Get List Student
     @GetMapping("/list")
@@ -38,4 +41,53 @@ public class StudentController {
         }
         return new ResponseEntity<>(studentList, HttpStatus.OK);
     }
+
+    // Hoàng begin
+    @GetMapping("/prepareDeleteStudent/{id}")
+    public ResponseEntity<?> PrepareDeleteStudent(@PathVariable Long id) {
+        Student student = studentService.findByID(id);
+        student.setStudentGroup(null);
+        if (student.getAppAccount() != null) {
+            student.getAppAccount().setAppRole(null);
+        }
+        student.setAppAccount(null);
+        this.studentService.save(student);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //Delete student by id
+    @DeleteMapping("/deleteStudent/{id}")
+    public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
+        studentService.delete(id);
+//        this.appAccountService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    //edit student
+    @PutMapping("/editStudent/{id}")
+    public ResponseEntity<List<Student>> editStudent(@RequestBody StudentDTO studentDTO, @PathVariable long id) {
+        Student student = studentService.findByID(id);
+        if (student == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            student.setStudentCode(studentDTO.getStudentCode().trim());
+            student.setFullName(studentDTO.getFullName().trim());
+            student.setTeacher(studentDTO.getTeacher());
+            student.setEmail(studentDTO.getEmail().trim());
+            student.setPhone(studentDTO.getPhone().trim());
+            student.setTopic(studentDTO.getTopic());
+            this.studentService.editStudent(student);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    //get student by id
+    @GetMapping("/findStudentById/{id}")
+    public ResponseEntity<?> findStudent(@PathVariable long id) {
+        Student student = studentService.findByID(id);
+        return new ResponseEntity<>(student, HttpStatus.OK);
+    }
+    //Hoàng end
+
 }

@@ -10,6 +10,16 @@ import java.util.List;
 public interface StudentService {
     // Create by: Đạt _ Student
     List<Student> findAllStudent();
+
+    Student findByID(Long id);
+
+    void delete(Long id);
+
     void saveStudent(StudentDTO studentDTO);
-    List<Student> searchStudent (String inputSearch);
+
+    List<Student> searchStudent(String inputSearch);
+
+    void editStudent(Student student);
+
+    void save(Student student);
 }
