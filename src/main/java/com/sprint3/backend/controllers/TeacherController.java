@@ -89,7 +89,7 @@ public class TeacherController {
      */
     // Create by: Đạt
        @GetMapping("/list1")
-    public ResponseEntity<?> getListTeacher() {
+    public ResponseEntity<?> getListTeacherThiDat() {
         List<Teacher> listTeacher = this.teacherService.findAllTeacher();
         return new ResponseEntity<>(listTeacher, HttpStatus.OK);
     }
