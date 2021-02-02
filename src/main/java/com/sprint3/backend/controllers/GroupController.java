@@ -45,6 +45,9 @@ public class GroupController {
             studentGroup.setGroupName(groupName);;
             this.studentGroupService.save(studentGroup);
             for (int i = 0; i < students.size() ; i++) {
+               if( this.studentService.findById(students.get(i).getId()).getStudentGroup() != null){
+                   return 0;
+               }
                     students.get(i).setStudentGroup(studentGroup);
                     students.get(i).setPosition(false);
                     this.studentService.save(students.get(i));
