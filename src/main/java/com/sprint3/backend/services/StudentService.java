@@ -40,4 +40,7 @@ public interface StudentService {
     Student findStudentByAccountId(Long accountId);
 
     // ---------------------- VInh start ---------------------------
+
+    /*List student*/
+    List<StudentDTO> getAllStudent(Long id);
 }

@@ -41,4 +41,8 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     @Query(value = "select teacher_code from teacher where teacher_code like %?1%", nativeQuery = true)
     List<Teacher> getTeacherCode(String string);
+
+    /*Get id teacher*/
+    @Query(nativeQuery = true, value = "select teacher.id from teacher where teacher.app_account_id = :idParam")
+    Long getIdTeacher(Long idParam);
 }

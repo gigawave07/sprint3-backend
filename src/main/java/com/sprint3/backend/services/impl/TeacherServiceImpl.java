@@ -171,4 +171,13 @@ public class TeacherServiceImpl implements TeacherService {
         }
         return null;
     }
+
+
+    /*Get id teacher*/
+    @Override
+    public Long getIdTeacher(Long id) {
+        return this.teacherRepository.getIdTeacher(id);
+    }
+
+
 }

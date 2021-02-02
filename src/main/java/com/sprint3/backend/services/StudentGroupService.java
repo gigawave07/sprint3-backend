@@ -26,4 +26,7 @@ public interface StudentGroupService {
      */
     StudentGroup save(StudentGroup studentGroup);
 
+
+    /*List student group*/
+    List<StudentGroupDTO> findAllStudentGroup(Long id);
 }

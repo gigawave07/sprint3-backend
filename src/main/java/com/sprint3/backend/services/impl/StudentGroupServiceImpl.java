@@ -94,4 +94,10 @@ public class StudentGroupServiceImpl implements StudentGroupService {
     public StudentGroup save(StudentGroup studentGroup) {
         return this.studentGroupRepository.save(studentGroup);
     }
+
+    /*List student group*/
+    @Override
+    public List<StudentGroupDTO> findAllStudentGroup(Long id) {
+        return this.studentGroupRepository.findAllStudentGroup(id);
+    }
 }

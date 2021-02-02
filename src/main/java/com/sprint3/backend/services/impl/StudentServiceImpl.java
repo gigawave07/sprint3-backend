@@ -115,4 +115,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     // ---------------------- VInh end ---------------------------
+
+    /*List student*/
+    @Override
+    public List<StudentDTO> getAllStudent(Long id) {
+        return this.studentRepository.getAllStudent(id);
+    }
 }

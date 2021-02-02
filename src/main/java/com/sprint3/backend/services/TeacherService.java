@@ -51,4 +51,6 @@ public interface TeacherService {
     void saveTeacher(Teacher teacher);
 
     List<Teacher> search(String input, String key, Pageable pageable);
+    /*Get id teacher*/
+    Long getIdTeacher(Long id);
 }
