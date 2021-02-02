@@ -59,7 +59,7 @@ public class ThesisDetail {
     private String secondReport;
 
     // relationship
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "check_thesis_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private CheckThesis checkThesis;
 }
