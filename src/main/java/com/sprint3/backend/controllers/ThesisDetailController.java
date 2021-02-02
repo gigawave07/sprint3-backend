@@ -68,6 +68,7 @@ public class ThesisDetailController {
 
     @PostMapping("/upload-thesis-detain")
     public ResponseEntity<?> upload(@RequestBody ThesisDetailVinhDTO thesisDetailVinhDTO) {
+        System.out.println(thesisDetailVinhDTO.getDescription());
         ThesisDetail thesisDetail = new ThesisDetail();
         if (thesisDetailVinhDTO.getId() != null) {
             thesisDetail = this.thesisDetailService.findById(thesisDetailVinhDTO.getId());
@@ -87,8 +88,8 @@ public class ThesisDetailController {
             thesisDetail.setFirstFileUrl(thesisDetailVinhDTO.getFileUrl());
             thesisDetail.setFirstProgressFile(thesisDetailVinhDTO.getProgressFile());
             thesisDetail.setFirstSubmitDate(LocalDateTime.now());
+            thesisDetail.setFirstDescription(thesisDetailVinhDTO.getDescription());
             thesisDetail.setCheckThesis(this.checkThesisService.findById(thesisDetailVinhDTO.getCheckThesisId()));
-
         }
         this.thesisDetailService.save(thesisDetail);
         return ResponseEntity.ok(new MessageDTO("upload success"));
@@ -147,6 +148,12 @@ public class ThesisDetailController {
         }
         this.thesisDetailService.save(thesisDetail);
         return ResponseEntity.ok(new MessageDTO("upload success"));
+    }
+
+    @GetMapping("/get-position-student/{studentId}")
+    public ResponseEntity<?> getPosition(@PathVariable Long studentId){
+        Student student = this.studentService.findStudentById(studentId);
+        return ResponseEntity.ok(student.getPosition());
     }
 
     // ---------------------- Vinh end -----------------------------
