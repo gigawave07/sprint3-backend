@@ -4,6 +4,7 @@ import com.sprint3.backend.converter.StudentGroupConverter;
 import com.sprint3.backend.entity.CheckThesis;
 import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.entity.StudentGroup;
+import com.sprint3.backend.entity.StudentGroupDTODanh;
 import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.StudentGroupDTO;
 import com.sprint3.backend.repository.CheckThesisRepository;
@@ -97,7 +98,7 @@ public class StudentGroupServiceImpl implements StudentGroupService {
 
     /*List student group*/
     @Override
-    public List<StudentGroupDTO> findAllStudentGroup(Long id) {
+    public List<StudentGroupDTODanh> findAllStudentGroup(Long id) {
         return this.studentGroupRepository.findAllStudentGroup(id);
     }
 }

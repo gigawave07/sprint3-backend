@@ -1,6 +1,7 @@
 package com.sprint3.backend.services;
 
 import com.sprint3.backend.entity.Student;
+import com.sprint3.backend.entity.StudentDTODanh;
 import com.sprint3.backend.model.StudentDTO;
 
 import java.util.List;
@@ -42,5 +43,5 @@ public interface StudentService {
     // ---------------------- VInh start ---------------------------
 
     /*List student*/
-    List<StudentDTO> getAllStudent(Long id);
+    List<StudentDTODanh> getAllStudent(Long id);
 }

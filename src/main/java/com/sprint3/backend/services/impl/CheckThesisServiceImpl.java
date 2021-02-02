@@ -1,10 +1,14 @@
 package com.sprint3.backend.services.impl;
 
 import com.sprint3.backend.entity.CheckThesis;
+import com.sprint3.backend.entity.CheckThesisDTODabh;
 import com.sprint3.backend.repository.CheckThesisRepository;
 import com.sprint3.backend.services.CheckThesisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CheckThesisServiceImpl implements CheckThesisService {
@@ -26,13 +30,13 @@ public class CheckThesisServiceImpl implements CheckThesisService {
 
     /*List check thesis unapproved*/
     @Override
-    public List<CheckThesisDTO> getAllCheckThesis(Long idTeacherParam) {
+    public List<CheckThesisDTODabh> getAllCheckThesis(Long idTeacherParam) {
         return this.checkThesisRepository.getAllCheckThesis(idTeacherParam);
     }
 
     /*List check thesis approved*/
     @Override
-    public List<CheckThesisDTO> getAllCheckThesisApproved(Long idTeacher) {
+    public List<CheckThesisDTODabh> getAllCheckThesisApproved(Long idTeacher) {
         return this.checkThesisRepository.getAllCheckThesisApproved(idTeacher);
     }
 

@@ -1,6 +1,7 @@
 package com.sprint3.backend.repository;
 
 import com.sprint3.backend.entity.CheckThesis;
+import com.sprint3.backend.entity.CheckThesisDTODabh;
 import com.sprint3.backend.model.CheckThesisDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -18,13 +19,13 @@ public interface CheckThesisRepository extends JpaRepository<CheckThesis, Long> 
     @Query(nativeQuery = true, value = "select * from project3_thesis_management.check_list_thesis\n" +
             "where project3_thesis_management.check_list_thesis.idTeacher = :idTeacherParam\n" +
             "and project3_thesis_management.check_list_thesis.status = false;")
-    List<CheckThesisDTO> getAllCheckThesis(Long idTeacherParam);
+    List<CheckThesisDTODabh> getAllCheckThesis(Long idTeacherParam);
 
     /*List check thesis approved*/
     @Query(nativeQuery = true, value = "select * from project3_thesis_management.check_list_thesis\n" +
             "where project3_thesis_management.check_list_thesis.idTeacher = :idTeacherParam\n" +
             "and project3_thesis_management.check_list_thesis.status = true;")
-    List<CheckThesisDTO> getAllCheckThesisApproved(Long idTeacherParam);
+    List<CheckThesisDTODabh> getAllCheckThesisApproved(Long idTeacherParam);
 
     /*Save check thesis*/
     @Modifying

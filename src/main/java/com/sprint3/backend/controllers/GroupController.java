@@ -1,20 +1,20 @@
 package com.sprint3.backend.controllers;
 
-import com.sprint3.backend.entity.Student;
-import com.sprint3.backend.entity.StudentGroup;
+import com.sprint3.backend.entity.*;
 import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.StudentGroupDTO;
 import com.sprint3.backend.services.StudentGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.sprint3.backend.converter.StudentGroupConverter;
 import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.entity.StudentGroup;
-import com.sprint3.backend.entity.Teacher;
 import com.sprint3.backend.model.GroupStudentDTOQuoc;
 import com.sprint3.backend.services.StudentGroupService;
 import com.sprint3.backend.services.StudentService;
@@ -106,11 +106,11 @@ public class GroupController {
 
     /*List student*/
     @RequestMapping(value = "/list-student-group/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<StudentDTO>> getAllStudentGroup(@PathVariable Long id) {
+    public ResponseEntity<List<StudentDTODanh>> getAllStudentGroup(@PathVariable Long id) {
         Long idTeacher = this.teacherService.getIdTeacher(id);
-        List<StudentGroupDTO> studentGroupList = this.studentGroupService.findAllStudentGroup(idTeacher);
-        List<StudentDTO> students = new ArrayList<>();
-        for (StudentGroupDTO studentGroupDTO : studentGroupList) {
+        List<StudentGroupDTODanh> studentGroupList = this.studentGroupService.findAllStudentGroup(idTeacher);
+        List<StudentDTODanh> students = new ArrayList<>();
+        for (StudentGroupDTODanh studentGroupDTO : studentGroupList) {
             students.addAll(this.studentService.getAllStudent(studentGroupDTO.getIdStudentGroup()));
         }
         return new ResponseEntity<>(students, HttpStatus.OK);

@@ -2,6 +2,7 @@ package com.sprint3.backend.services;
 
 import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.entity.StudentGroup;
+import com.sprint3.backend.entity.StudentGroupDTODanh;
 import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.StudentGroupDTO;
 
@@ -28,5 +29,5 @@ public interface StudentGroupService {
 
 
     /*List student group*/
-    List<StudentGroupDTO> findAllStudentGroup(Long id);
+    List<StudentGroupDTODanh> findAllStudentGroup(Long id);
 }

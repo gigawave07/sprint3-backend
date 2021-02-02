@@ -1,6 +1,7 @@
 package com.sprint3.backend.repository;
 
 import com.sprint3.backend.entity.Student;
+import com.sprint3.backend.entity.StudentDTODanh;
 import com.sprint3.backend.model.StudentDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -61,5 +62,5 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
             "from student\n" +
             "inner join student_group on student.group_id = student_group.id\n" +
             "where student.group_id = :idStudentParam")
-    List<StudentDTO> getAllStudent(Long idStudentParam);
+    List<StudentDTODanh> getAllStudent(Long idStudentParam);
 }

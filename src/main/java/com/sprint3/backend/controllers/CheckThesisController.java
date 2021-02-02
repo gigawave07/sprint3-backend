@@ -1,5 +1,6 @@
 package com.sprint3.backend.controllers;
 
+import com.sprint3.backend.entity.CheckThesisDTODabh;
 import com.sprint3.backend.entity.Student;
 import com.sprint3.backend.entity.ThesisDetail;
 import com.sprint3.backend.services.CheckThesisService;
@@ -51,7 +52,7 @@ public class CheckThesisController {
     @Autowired
     private TeacherService teacherService;
 
-    List<CheckThesisDTO> checkThesisList;
+    List<CheckThesisDTODabh> checkThesisList;
 
 
     /*List check thesis unapproved*/
@@ -66,7 +67,7 @@ public class CheckThesisController {
     @RequestMapping(value = "list-check-thesis-approved/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> getAllCheckThesisApproved(@PathVariable Long id) {
         Long idTeacher = this.teacherService.getIdTeacher(id);
-        List<CheckThesisDTO> checkThesisListApproved = this.checkThesisService.getAllCheckThesisApproved(idTeacher);
+        List<CheckThesisDTODabh> checkThesisListApproved = this.checkThesisService.getAllCheckThesisApproved(idTeacher);
         return new ResponseEntity<>(checkThesisListApproved, HttpStatus.OK);
     }
 

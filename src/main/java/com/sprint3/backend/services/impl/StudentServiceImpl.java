@@ -1,6 +1,7 @@
 package com.sprint3.backend.services.impl;
 
 import com.sprint3.backend.entity.Student;
+import com.sprint3.backend.entity.StudentDTODanh;
 import com.sprint3.backend.entity.Teacher;
 import com.sprint3.backend.entity.Thesis;
 import com.sprint3.backend.model.StudentDTO;
@@ -118,7 +119,7 @@ public class StudentServiceImpl implements StudentService {
 
     /*List student*/
     @Override
-    public List<StudentDTO> getAllStudent(Long id) {
+    public List<StudentDTODanh> getAllStudent(Long id) {
         return this.studentRepository.getAllStudent(id);
     }
 }
