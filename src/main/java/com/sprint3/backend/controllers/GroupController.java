@@ -11,6 +11,7 @@ import com.sprint3.backend.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class GroupController {
      * @return int
      */
     @PostMapping("/createNew/{idTeacher}")
-    public int addNewGroup(@RequestBody GroupStudentDTOQuoc groupStudentDTOQuoc,@PathVariable("idTeacher") Long id) {
+    public int addNewGroup(@Valid @RequestBody  GroupStudentDTOQuoc groupStudentDTOQuoc, @PathVariable("idTeacher") Long id) {
         try {
             List<Student> students = groupStudentDTOQuoc.getStudents();
             Teacher teacher = this.teacherService.findTeacherById(id);

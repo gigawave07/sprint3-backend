@@ -20,6 +20,7 @@ public class StudentGroup {
     @Column(name = "id", columnDefinition = "BIGINT")
     private Long id;
 
+
     @Column(name = "group_name", columnDefinition = "VARCHAR(50)")
     private String groupName;
 
