@@ -40,6 +40,6 @@ public class CheckThesis {
 
     @OneToOne
     @JoinColumn(name = "student_group_id", referencedColumnName = "id", columnDefinition = "BIGINT")
-    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+//    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
     private StudentGroup studentGroup;
 }
