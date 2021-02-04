@@ -1,8 +1,0 @@
-GET http://localhost:8080/teacher/quantity-student
-Accept: application/json
-
-###
-GET http://localhost:8080/statistics/teacher
-Accept: application/json
-
-###
