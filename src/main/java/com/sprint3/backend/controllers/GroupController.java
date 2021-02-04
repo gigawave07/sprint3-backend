@@ -32,8 +32,9 @@ public class GroupController {
     /*List student*/
     @RequestMapping(value = "/list-student-group/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<StudentDTO>> getAllStudentGroup(@PathVariable Long id) {
-        Long idTeacher = this.teacherService.getIdTeacher(id);
-        List<StudentGroupDTO> studentGroupList = this.studentGroupService.findAllStudentGroup(idTeacher);
+//        Long idTeacher = this.teacherService.getIdTeacher(id);
+//        System.out.println(id);
+        List<StudentGroupDTO> studentGroupList = this.studentGroupService.findAllStudentGroup(id);
         List<StudentDTO> students = new ArrayList<>();
         for (StudentGroupDTO studentGroupDTO : studentGroupList) {
             students.addAll(this.studentService.getAllStudent(studentGroupDTO.getIdStudentGroup()));

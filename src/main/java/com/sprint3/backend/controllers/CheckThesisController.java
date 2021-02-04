@@ -31,16 +31,16 @@ public class CheckThesisController {
     /*List check thesis unapproved*/
     @RequestMapping(value = "list-check-thesis/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> getAllCheckThesis(@PathVariable Long id) {
-        Long idTeacher = this.teacherService.getIdTeacher(id);
-        checkThesisList = this.checkThesisService.getAllCheckThesis(idTeacher);
+//        Long idTeacher = this.teacherService.getIdTeacher(id);
+        checkThesisList = this.checkThesisService.getAllCheckThesis(id);
         return new ResponseEntity<>(checkThesisList, HttpStatus.OK);
     }
 
     /*List check thesis approved*/
     @RequestMapping(value = "list-check-thesis-approved/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> getAllCheckThesisApproved(@PathVariable Long id) {
-        Long idTeacher = this.teacherService.getIdTeacher(id);
-        List<CheckThesisDTO> checkThesisListApproved = this.checkThesisService.getAllCheckThesisApproved(idTeacher);
+//        Long idTeacher = this.teacherService.getIdTeacher(id);
+        List<CheckThesisDTO> checkThesisListApproved = this.checkThesisService.getAllCheckThesisApproved(id);
         return new ResponseEntity<>(checkThesisListApproved, HttpStatus.OK);
     }
 
@@ -55,8 +55,8 @@ public class CheckThesisController {
     /*Display list delete thesis unapproved*/
     @RequestMapping(value = "load-list-delete-check-thesis/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> loadListDeleteCheckThesis(@PathVariable Long id) {
-        Long idTeacher = this.teacherService.getIdTeacher(id);
-        List<CheckThesis> loadListDeleteCheckThesis = this.checkThesisService.loadListDeleteCheckThesis(idTeacher);
+//        Long idTeacher = this.teacherService.getIdTeacher(id);
+        List<CheckThesis> loadListDeleteCheckThesis = this.checkThesisService.loadListDeleteCheckThesis(id);
         return new ResponseEntity<>(loadListDeleteCheckThesis, HttpStatus.OK);
     }
 
