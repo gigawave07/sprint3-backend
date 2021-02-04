@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity(name = "teacher")
@@ -31,13 +32,13 @@ public class Teacher {
     private String email;
 
     @Column(name = "identity_number", columnDefinition = "VARCHAR(50)")
-    private String identityNumber;
-
-    @Column(name = "phone", columnDefinition = "VARCHAR(50)")
-    private String phone;
+    private LocalDate identityNumber;
 
     @Column(name = "number_student", columnDefinition = "BIGINT")
     private Long numberStudent;
+
+    @Column(name = "phone", columnDefinition = "VARCHAR(50)")
+    private String phone;
 
     // relationship
 
@@ -52,8 +53,4 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
     private List<Thesis> thesisList;
-
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private List<News> newsList;
 }

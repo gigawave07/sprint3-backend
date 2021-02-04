@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
+import java.util.List;
 
 @Entity(name = "student")
 @Getter
@@ -36,12 +36,6 @@ public class Student {
     @Column(name = "position", columnDefinition = "BIT")
     private Boolean position = false;
 
-    @Column(name = "teacher", columnDefinition = "VARCHAR(50)")
-    private String teacher;
-
-    @Column(name = "topic", columnDefinition = "VARCHAR(50)")
-    private String topic;
-
     // relationship
 
     @OneToOne
@@ -50,9 +44,13 @@ public class Student {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private java.util.List<Interaction> interactionList;
+    private List<Interaction> interactionList;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private StudentGroup studentGroup;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "class_requirement_id", referencedColumnName = "id", columnDefinition = "BIGINT")
+    private ClassRequirement classRequirement;
 }

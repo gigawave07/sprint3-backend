@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "student_group")
 @Getter
@@ -33,7 +34,7 @@ public class StudentGroup {
 
     @OneToMany(mappedBy = "studentGroup", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private java.util.List<Student> studentList;
+    private List<Student> studentList;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id", referencedColumnName = "id", columnDefinition = "BIGINT")

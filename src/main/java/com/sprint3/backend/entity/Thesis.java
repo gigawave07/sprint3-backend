@@ -26,7 +26,7 @@ public class Thesis {
     private String statement;
 
     @Column(name = "amount", columnDefinition = "BIGINT")
-    private Long amount;
+    private String amount;
 
     @Column(name = "description", columnDefinition = "VARCHAR(250)")
     private String description;
@@ -40,7 +40,7 @@ public class Thesis {
     @JoinColumn(name = "teacher_id", referencedColumnName = "id", columnDefinition = "BIGINT")
     private Teacher teacher;
 
-    @OneToOne(mappedBy = "thesis", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "thesis", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private CheckThesis checkThesis;
+    private List<CheckThesis> checkThesisList;
 }

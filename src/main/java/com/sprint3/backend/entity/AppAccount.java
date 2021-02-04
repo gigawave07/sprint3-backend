@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "app_account")
 @Getter
@@ -53,5 +54,5 @@ public class AppAccount {
 
     @OneToMany(mappedBy = "appAccount", cascade = CascadeType.ALL)
     @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-    private java.util.List<Notification> notificationList;
+    private List<Notification> notificationList;
 }
