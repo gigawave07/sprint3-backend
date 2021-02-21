@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity(name = "progress_thesis")
 @Getter
@@ -32,7 +33,7 @@ public class ProgressThesis {
     private Long status;
 
     @Column(name = "submit_date", columnDefinition = "DATETIME")
-    private LocalDateTime submitDate;
+    private Date submitDate;
 
     @Column(name = "progress", columnDefinition = "BIGINT")
     private Long progress;
