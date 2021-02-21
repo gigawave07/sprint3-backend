@@ -1,0 +1,47 @@
+GET http://localhost:8080/account/find-account/1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE3NTI5NzEsImlhdCI6MTYxMTczNDk3MX0.vCzUaxde7tbUzB_ofuSMbNMdfDLjyFtLCF_oArtsSMM2VighmnF4YJriMhoGITy3UN0NjHUCCfSdNcx0gtMGCQ
+
+###
+GET http://localhost:8080/student/find-all/2
+Accept: application/json
+
+###
+PUT http://localhost:8080/admin/update-admin-info/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE2OTMzNzQsImlhdCI6MTYxMTY3NTM3NH0.jiDlx6wZKDm7CDOnSbu9Pj3jmg_0UXJ2hPd-OLk6wIHuAKmWmHidzQ6iU3iGMRNqvnAa7u-8S1NWkuTSmwZ46w
+
+{
+  "fullName": "Danh con be de",
+  "email": "danhbede@gmail.com",
+  "address": "Tam ky"
+}
+
+###
+PUT http://localhost:8080/account/change-password-user/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE3NDA0MTYsImlhdCI6MTYxMTcyMjQxNn0.9K-r50IKzNZPy6mppj84JM5hYLf9cWWcu3gUDgUlD09PXup9dTD0MLXnPGTlCLSBZvwxXXefP6UkTIgNiF8fNA
+
+{
+  "passwordNew": "Aqwerty1"
+}
+
+###
+PUT http://localhost:8080/account/check-passsword-user/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2MTE3NTI5NzEsImlhdCI6MTYxMTczNDk3MX0.vCzUaxde7tbUzB_ofuSMbNMdfDLjyFtLCF_oArtsSMM2VighmnF4YJriMhoGITy3UN0NjHUCCfSdNcx0gtMGCQ
+
+{
+  "passwordOld": "Aqwerty1"
+}
+
+###
+POST http://localhost:8080/authenticate
+Content-Type: application/json
+
+{
+  "username": "admin@gmail.com",
+  "password": "Aqwerty1"
+}
+
+###

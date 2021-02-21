@@ -1,6 +1,9 @@
 package com.sprint3.backend.services.impl;
 
+import com.sprint3.backend.entity.AppAccount;
+import com.sprint3.backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +13,6 @@ import com.sprint3.backend.entity.StudentGroup;
 import com.sprint3.backend.entity.Teacher;
 import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.maihtq.StudentGroupDTO;
-import com.sprint3.backend.repository.StudentGroupRepository;
-import com.sprint3.backend.repository.StudentRepository;
-import com.sprint3.backend.repository.TeacherRepository;
 import com.sprint3.backend.services.TeacherService;
 
 @Service
@@ -25,6 +25,10 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Autowired
     private StudentGroupRepository studentGroupRepository;
+    @Autowired
+    private AppRoleRepository appRoleRepository;
+    @Autowired
+    private AppAccountRepository appAccountRepository;
 
     @Override
     public List<Teacher> findAll() {
@@ -108,4 +112,72 @@ public class TeacherServiceImpl implements TeacherService {
     /**
      * MaiHTQ end
      */
+    // Create by: Đạt
+     @Override
+    public List<Teacher> findAllTeacher() {
+        return this.teacherRepository.findAll();
+    }
+
+
+    /**
+     * Quoc sử dụng để lấy thông tin giáo viên tạo nhóm
+     */
+    @Override
+    public Teacher findTeacherById(Long id) {
+        return this.teacherRepository.findById(id).orElse(null);
+    }
+    // end quốc
+
+    /**
+     * Lành merge thêm 5k
+     * @param id
+     * @return
+     */
+    @Override
+    public Teacher findByTeacherId(Long id) {
+        return teacherRepository.findById(id).orElse(null);
+    }
+
+
+    @Override
+    public void saveTeacher(Teacher teacher) {
+        try {
+            this.teacherRepository.save(teacher);
+            AppAccount appAccount = new AppAccount();
+            appAccount.setAppRole(this.appRoleRepository.findById((long) 1).orElse(null));
+            appAccount.setUsername(teacher.getTeacherCode());
+            appAccount.setPassword("123");
+            appAccount.setEnabled(true);
+            this.appAccountRepository.save(appAccount);
+        } catch (RuntimeException runtimeException) {
+            runtimeException.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public List<Teacher> search(String input, String key, Pageable pageable) {
+        switch (input) {
+            case "fullName":
+                return teacherRepository.getTeachersByName(key);
+            case "teacherCode":
+                return teacherRepository.getTeachersByTeacherCode(key);
+            case "email":
+                return teacherRepository.getTeachersByEmail(key);
+            case "identityNumber":
+                return teacherRepository.getTeachersByIdNumber(key);
+            case "phone":
+                return teacherRepository.getTeachersByPhone(key);
+        }
+        return null;
+    }
+
+
+    /*Get id teacher*/
+    @Override
+    public Long getIdTeacher(Long id) {
+        return this.teacherRepository.getIdTeacher(id);
+    }
+
+
 }

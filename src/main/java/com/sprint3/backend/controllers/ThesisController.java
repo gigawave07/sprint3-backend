@@ -1,8 +1,10 @@
 package com.sprint3.backend.controllers;
 
+import com.sprint3.backend.entity.Teacher;
 import com.sprint3.backend.entity.Thesis;
 import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.ThesisDTO;
+import com.sprint3.backend.services.TeacherService;
 import com.sprint3.backend.services.ThesisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/thesis")
@@ -19,6 +25,9 @@ import java.util.List;
 public class ThesisController {
     @Autowired
     ThesisService thesisService;
+
+    @Autowired
+    TeacherService teacherService;
 
     /**
      *Lành start
@@ -48,8 +57,10 @@ public class ThesisController {
         return ResponseEntity.ok(thesisList);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<List<Thesis>> addNewThesis(@RequestBody Thesis thesis) {
+    @PostMapping("/add/{teacherId}")
+    public ResponseEntity<List<Thesis>> addNewThesis(@RequestBody Thesis thesis,@PathVariable("teacherId") Long id) {
+        Teacher teacher = this.teacherService.findByTeacherId(id);
+        thesis.setTeacher(teacher);
         this.thesisService.createNewThesis(thesis);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -82,4 +93,10 @@ public class ThesisController {
     /**
      * Lành end
      */
+    // Create by: Đạt
+    @GetMapping("/list2")
+    public ResponseEntity<?> getListThesis() {
+        List<Thesis> listThesis = this.thesisService.findAllThesis();
+        return new ResponseEntity<>(listThesis, HttpStatus.OK);
+    }
 }

@@ -19,4 +19,30 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     @Query(value = "select * from instruction_status", nativeQuery = true)
     List<StudentGroupDTO> countQuantityStudent();
+    /**
+     * Nhật start
+     */
+    @Query(nativeQuery = true, value = "SELECT * FROM teacher where app_account_id = ?;")
+    Teacher getTeacherInfoByIDAccount(Long idAccount);
+    @Query(value = "select * from teacher where teacher.full_name like %?1%", nativeQuery = true)
+    List<Teacher> getTeachersByName(String string);
+
+    @Query(value = "select * from teacher where teacher_code like %?1%", nativeQuery = true)
+    List<Teacher> getTeachersByTeacherCode(String string);
+
+    @Query(value = "select * from teacher where teacher.identity_number like %?1%", nativeQuery = true)
+    List<Teacher> getTeachersByIdNumber(String string);
+
+    @Query(value = "select * from teacher where teacher.email like %?1%", nativeQuery = true)
+    List<Teacher> getTeachersByEmail(String string);
+
+    @Query(value = "select * from teacher where teacher.phone like %?1%", nativeQuery = true)
+    List<Teacher> getTeachersByPhone(String string);
+
+    @Query(value = "select teacher_code from teacher where teacher_code like %?1%", nativeQuery = true)
+    List<Teacher> getTeacherCode(String string);
+
+    /*Get id teacher*/
+    @Query(nativeQuery = true, value = "select teacher.id from teacher where teacher.app_account_id = :idParam")
+    Long getIdTeacher(Long idParam);
 }

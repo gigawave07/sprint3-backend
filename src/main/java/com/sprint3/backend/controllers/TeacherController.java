@@ -8,9 +8,12 @@ import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.maihtq.StudentGroupDTO;
 import com.sprint3.backend.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
+
 
 @RestController
 @RequestMapping("/teacher")
@@ -21,7 +24,7 @@ public class TeacherController {
 
     /**
      * MaiHTQ Start
-     * 
+     *
      * getListTeacher
      * @return teacherList
      */
@@ -86,5 +89,56 @@ public class TeacherController {
 
     /**
      * MaiHTQ end
+     */
+    // Create by: Đạt
+       @GetMapping("/list1")
+    public ResponseEntity<?> getListTeacherThiDat() {
+        List<Teacher> listTeacher = this.teacherService.findAllTeacher();
+        return new ResponseEntity<>(listTeacher, HttpStatus.OK);
+    }
+
+
+    /**
+     * Ngan start
+     */
+
+    /**
+     * search teacher by categories
+     * @param key, input
+     * @return List<Teacher>
+     */
+    @GetMapping("/get-teacher/{input}/{key}")
+    public List<Teacher> getTeacher(
+            @RequestParam(defaultValue = "0") int page,
+            @PathVariable String key,
+            @PathVariable String input) {
+        Pageable pageable = PageRequest.of(page, 5);
+        return teacherService.search(input, key, pageable);
+    }
+    /**
+     * get the teacher list
+     * @return ResponseEntity
+     */
+    @GetMapping("/get-all")
+    public ResponseEntity<List<Teacher>> getAll() {
+        List<Teacher> teacherList = this.teacherService.findAll();
+        return new ResponseEntity<>(teacherList, HttpStatus.OK);
+    }
+    /**
+     * Add new teacher to the list
+     * @return ResponseEntity
+     */
+    @PostMapping("/add-new-teacher")
+    public ResponseEntity<Void> addTeacher(@RequestBody Teacher teacher) {
+        if (teacher == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            teacherService.saveTeacher(teacher);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    /**
+     * Ngan end
      */
 }

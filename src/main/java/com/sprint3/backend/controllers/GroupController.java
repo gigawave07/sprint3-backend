@@ -1,12 +1,25 @@
 package com.sprint3.backend.controllers;
 
-import com.sprint3.backend.entity.Student;
-import com.sprint3.backend.entity.StudentGroup;
+import com.sprint3.backend.entity.*;
+import com.sprint3.backend.model.MessageDTO;
 import com.sprint3.backend.model.StudentGroupDTO;
 import com.sprint3.backend.services.StudentGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import com.sprint3.backend.converter.StudentGroupConverter;
+import com.sprint3.backend.entity.Student;
+import com.sprint3.backend.entity.StudentGroup;
+import com.sprint3.backend.model.GroupStudentDTOQuoc;
+import com.sprint3.backend.services.StudentGroupService;
+import com.sprint3.backend.services.StudentService;
+import com.sprint3.backend.services.TeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +35,12 @@ public class GroupController {
 
     @Autowired
     private StudentGroupService studentGroupService;
+    @Autowired
+    StudentGroupConverter studentGroupConverter;
+    @Autowired
+    StudentService studentService;
+    @Autowired
+    TeacherService teacherService;
 
     @GetMapping("/list")
     public ResponseEntity<List<StudentGroupDTO>> getAll(){
@@ -36,9 +55,9 @@ public class GroupController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<StudentGroup> deleteGroup(@PathVariable Long id){
-        this.studentGroupService.setNullStudent(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<MessageDTO> deleteGroup(@PathVariable Long id){
+        MessageDTO messageDTO = this.studentGroupService.setNullStudent(id);
+        return new ResponseEntity<>(messageDTO, HttpStatus.OK);
     }
 
     @GetMapping("/findBy/{id}")
@@ -50,4 +69,50 @@ public class GroupController {
     /**
      * Lành end
      */
+
+    /**
+     * quoc controller create new group
+     * @param groupStudentDTOQuoc
+     * @return int
+     */
+    @PostMapping("/createNew/{idTeacher}")
+    public int addNewGroup(@RequestBody GroupStudentDTOQuoc groupStudentDTOQuoc,@PathVariable("idTeacher") Long id) {
+        try {
+            List<Student> students = groupStudentDTOQuoc.getStudents();
+            Teacher teacher = this.teacherService.findTeacherById(id);
+            Long idStudentLeader  =  groupStudentDTOQuoc.getLeaderGroupId();
+            StudentGroup studentGroup = new StudentGroup();
+            Long quantity = Long.valueOf(students.size());
+            studentGroup.setQuantity(String.valueOf(quantity));
+            studentGroup.setTeacher(teacher);
+            String groupName = groupStudentDTOQuoc.getGroupName();
+            studentGroup.setGroupName(groupName);;
+            this.studentGroupService.save(studentGroup);
+            for (int i = 0; i < students.size() ; i++) {
+                students.get(i).setStudentGroup(studentGroup);
+                students.get(i).setPosition(false);
+                this.studentService.save(students.get(i));
+            }
+            Student studentLeader = this.studentService.findById(idStudentLeader);
+            studentLeader.setPosition(true);
+            this.studentService.save(studentLeader);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    //end quoc tạo group
+
+    /*List student*/
+    @RequestMapping(value = "/list-student-group/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<StudentDTODanh>> getAllStudentGroup(@PathVariable Long id) {
+        Long idTeacher = this.teacherService.getIdTeacher(id);
+        List<StudentGroupDTODanh> studentGroupList = this.studentGroupService.findAllStudentGroup(idTeacher);
+        List<StudentDTODanh> students = new ArrayList<>();
+        for (StudentGroupDTODanh studentGroupDTO : studentGroupList) {
+            students.addAll(this.studentService.getAllStudent(studentGroupDTO.getIdStudentGroup()));
+        }
+        return new ResponseEntity<>(students, HttpStatus.OK);
+    }
 }
